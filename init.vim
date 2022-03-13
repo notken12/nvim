@@ -3,8 +3,6 @@
 
 let $TMP="/tmp"
 
-let g:airline_theme = 'gruvbox'
-
 set termguicolors
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -17,33 +15,49 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+" Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
 "Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'christoomey/vim-tmux-navigator'
 
+" Color theme
 Plug 'morhetz/gruvbox'
 
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 
+" Status line
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
+" Ctrl+p search
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+" File tabs
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 
+" Git integration
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
+" gcc and gc shortcuts for commenting lines
 Plug 'tpope/vim-commentary'
 
+" Show a pane with an outline of the file
 Plug 'preservim/tagbar'
 
 Plug 'glepnir/dashboard-nvim'
+" Plug 'puremourning/vimspector'
+Plug 'mfussenegger/nvim-dap'
+" Plug 'andweeb/presence.nvim'
 
+" File formatting
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'npm ci' }
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Initialize plugin system
 call plug#end()
 
@@ -52,6 +66,11 @@ lua require('plugins')
 " lua require('bufferline.state').set_offset(31, 'Explorer')
 
 lua require('config')
+" lua require('presence')
+
+let g:airline_theme='base16'
+
+
 inoremap jk <ESC>
 nmap <C-n> :NERDTreeToggle<CR>
 vmap ++ <plug>NERDCommenterToggle
@@ -116,12 +135,14 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " ctrlp
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " let g:telescope.defaults.file_ignore_patterns = ['node_modules', '.git']
 
+" lua require('telescope')
+
 " Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <C-P> <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
@@ -147,6 +168,7 @@ set expandtab
 
 colorscheme gruvbox
 
+au VimEnter * hi Normal ctermbg=none
 " sync open file with NERDTree
 " " Check if NERDTree is open or active
 function! IsNERDTreeOpen()
@@ -221,7 +243,7 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
+  if (index(['vim','help'], &filetypush --set-upstream origin masterpe) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
@@ -382,7 +404,7 @@ let g:dashboard_custom_header = [
 " }
 " EOF
 "
-" " for transparent background
+" for transparent background
 function! AdaptColorscheme()
    highlight clear CursorLine
    highlight Normal ctermbg=none
@@ -416,3 +438,37 @@ autocmd InsertLeave * set nocursorline
 "set nocursorline
 
 " trasparent end
+" :lua require'dap'.continue()
+
+lua << EOF
+local dap = require('dap')
+dap.adapters.node2 = {
+  type = 'executable',
+  command = 'node',
+  args = {'c:/users/zenco/appdata/local/nvim/vscode-node-debug2/out/src/nodeDebug.js'},
+}
+dap.configurations.javascript = {
+  {
+    name = 'Launch',
+    type = 'node2',
+    request = 'launch',
+    program = '${file}',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+  },
+  {
+    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+    name = 'Attach to process',
+    type = 'node2',
+    request = 'attach',
+    processId = require'dap.utils'.pick_process,
+  },
+}
+EOF
+
+nnoremap <silent> <leader>b :<C-U>lua require'dap'.toggle_breakpoint()<cr>
+nnoremap <silent> <leader>d :<C-U>lua require'dap'.continue()<cr>
+
+
