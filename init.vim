@@ -14,7 +14,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " File tree
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
@@ -92,12 +92,13 @@ let g:airline_theme='base16'
 let g:airline#extensions#tabline#enabled = 1
 
 inoremap jk <ESC>
-nmap <C-b> :NERDTreeToggle<CR>
+" nmap <C-b> :NERDTreeToggle<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+" autocmd VimEnter * NERDTree | wincmd p
 
 let g:NERDTreeGitStatusWithFlags = 1
 "let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -117,10 +118,10 @@ let g:NERDTreeGitStatusWithFlags = 1
 
 let g:NERDTreeIgnore = ['^node_modules$']
 
-augroup DIRCHANGE
-    au!
-    autocmd DirChanged global :NERDTreeCWD
-augroup END
+" augroup DIRCHANGE
+"     au!
+"     autocmd DirChanged global :NERDTreeCWD
+" augroup END
 
 " Note: You must define the dictionary first before setting values.
 " Also, it's a good idea to check whether it exists as to avoid 
@@ -192,23 +193,23 @@ set expandtab
 colorscheme gruvbox
 
 au VimEnter * hi Normal ctermbg=none
-" sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
+" " sync open file with NERDTree
+" " " Check if NERDTree is open or active
+" function! IsNERDTreeOpen()
+"   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+" endfunction
 
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
+" " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" " file, and we're not in vimdiff
+" function! SyncTree()
+"   if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+"     NERDTreeFind
+"     wincmd p
+"   endif
+" endfunction
 
 " Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
+" autocmd BufEnter * call SyncTree()
 
 " coc config
 let g:coc_global_extensions = [

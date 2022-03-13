@@ -1,7 +1,7 @@
 local tree ={}
 tree.open = function ()
    require'bufferline.state'.set_offset(31, 'Explorer')
-   --require'nerdtree'.open()
+   require'nerdtree'.open()
 end
 
 tree.close = function ()
@@ -9,6 +9,6 @@ tree.close = function ()
    require'nerdtree'.close()
 end
 
-require'bufferline.state'.set_offset(31, 'Explorer')
+-- require'bufferline.state'.set_offset(31, 'Explorer')
 
 return tree 
