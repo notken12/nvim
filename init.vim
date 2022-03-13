@@ -7,13 +7,19 @@ set termguicolors
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
+" Utils
+Plug 'nvim-lua/plenary.nvim'
+
+" Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" File tree
 Plug 'scrooloose/nerdtree'
-"Plug 'tsony-tsonev/nerdtree-git-plugin'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
 Plug 'ryanoasis/vim-devicons'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 " Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
@@ -30,13 +36,11 @@ Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Ctrl+p search
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+
 
 " File tabs
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'romgrk/barbar.nvim'
+" Plug 'romgrk/barbar.nvim'
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -48,31 +52,47 @@ Plug 'tpope/vim-commentary'
 " Show a pane with an outline of the file
 Plug 'preservim/tagbar'
 
+" Dashboard
 Plug 'glepnir/dashboard-nvim'
-" Plug 'puremourning/vimspector'
+
+" Debugger
 Plug 'mfussenegger/nvim-dap'
+
+" Discord status
 " Plug 'andweeb/presence.nvim'
 
 " File formatting
 " post install (yarn install | npm install) then load plugin only for editing supported files
-Plug 'prettier/vim-prettier', { 'do': 'npm ci' }
+" Plug 'prettier/vim-prettier', { 'do': 'npm ci' }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" Initialize plugin system
+
+" Git gutter and line blame
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'lewis6991/gitsigns.nvim'
+" InitPlug 'nvim-lua/plenary.nvim'ialize plugin system
+
+
 call plug#end()
 
-lua require('plugins')
+lua require('user.config')
+lua require('user.plugins')
 "lua require('custom/tree')
 " lua require('bufferline.state').set_offset(31, 'Explorer')
 
-lua require('config')
-" lua require('presence')
+" Auto update git repo paths
+autocmd BufEnter * :lua require('lazygit.utils').project_root_dir()
+
+nnoremap <silent> <leader>g <cmd>lua require("telescope").extensions.lazygit.lazygit()<cr>
+
+" Setup Prettier command
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 let g:airline_theme='base16'
-
+let g:airline#extensions#tabline#enabled = 1
 
 inoremap jk <ESC>
-nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-b> :NERDTreeToggle<CR>
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
@@ -121,6 +141,9 @@ let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.dirty='⚡'
 
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+
 " If you only see boxes here it may be because your system doesn't have
 " the correct fonts. Try it in vim first and if that fails see the help 
 " pages for vim-airline :help airline-troubleshooting
@@ -149,9 +172,9 @@ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
 " lua require('telescope').setup{  defaults = { file_ignore_patterns = { ".git", "node_modules" } }}
-" j/k will move virtual lines (lines that wrap)
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+" up/down will move virtual lines (lines that wrap)
+noremap <silent> <expr> <Down> (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> <Up> (v:count == 0 ? 'gk' : 'k')
 
 :inoremap <C-H> <C-W>
 ":map <C-Z> :undo<CR>
