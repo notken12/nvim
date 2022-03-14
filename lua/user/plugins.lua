@@ -48,4 +48,11 @@ return require('packer').startup(function()
   use {
     'preservim/tagbar'
   }
+
+  use {'neoclide/coc.nvim', branch = 'release'}
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
 end)

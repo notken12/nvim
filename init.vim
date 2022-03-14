@@ -2,6 +2,7 @@
 
 
 let $TMP="/tmp"
+let $TERM="xterm-256color"
 
 set termguicolors
 " Specify a directory for plugins
@@ -11,7 +12,7 @@ call plug#begin('./plugged')
 Plug 'nvim-lua/plenary.nvim'
 
 " Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " File tree
 " Plug 'scrooloose/nerdtree'
@@ -65,7 +66,7 @@ Plug 'mfussenegger/nvim-dap'
 " post install (yarn install | npm install) then load plugin only for editing supported files
 " Plug 'prettier/vim-prettier', { 'do': 'npm ci' }
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Git gutter and line blame
 " Plug 'nvim-lua/plenary.nvim'
@@ -192,7 +193,9 @@ set expandtab
 
 colorscheme gruvbox
 
-au VimEnter * hi Normal ctermbg=none
+" Transparent background
+" au VimEnter * hi Normal ctermbg=none
+
 " " sync open file with NERDTree
 " " " Check if NERDTree is open or active
 " function! IsNERDTreeOpen()
@@ -429,32 +432,32 @@ let g:dashboard_custom_header = [
 " EOF
 "
 " for transparent background
-function! AdaptColorscheme()
-   highlight clear CursorLine
-   highlight Normal ctermbg=none
-   highlight LineNr ctermbg=none
-   highlight Folded ctermbg=none
-   highlight NonText ctermbg=none
-   highlight SpecialKey ctermbg=none
-   highlight VertSplit ctermbg=none
-   highlight SignColumn ctermbg=none
-endfunction
-autocmd ColorScheme * call AdaptColorscheme()
+" function! AdaptColorscheme()
+"    highlight clear CursorLine
+"    highlight Normal ctermbg=none
+"    highlight LineNr ctermbg=none
+"    highlight Folded ctermbg=none
+"    highlight NonText ctermbg=none
+"    highlight SpecialKey ctermbg=none
+"    highlight VertSplit ctermbg=none
+"    highlight SignColumn ctermbg=none
+" endfunction
+" autocmd ColorScheme * call AdaptColorscheme()
 
-highlight Normal guibg=NONE ctermbg=NONE
-highlight CursorColumn cterm=NONE ctermbg=NONE ctermfg=NONE
-highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
-highlight CursorLineNr cterm=NONE ctermbg=NONE ctermfg=NONE
-highlight clear LineNr
-highlight clear SignColumn
-highlight clear StatusLine
+" highlight Normal guibg=NONE ctermbg=NONE
+" highlight CursorColumn cterm=NONE ctermbg=NONE ctermfg=NONE
+" highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
+" highlight CursorLineNr cterm=NONE ctermbg=NONE ctermfg=NONE
+" highlight clear LineNr
+" highlight clear SignColumn
+" highlight clear StatusLine
 
 
-" Change Color when entering Insert Mode
-autocmd InsertEnter * set nocursorline
+" " Change Color when entering Insert Mode
+" autocmd InsertEnter * set nocursorline
 
-" Revert Color to default when leaving Insert Mode
-autocmd InsertLeave * set nocursorline
+" " Revert Color to default when leaving Insert Mode
+" autocmd InsertLeave * set nocursorline
 
 "" extra settings, uncomment them if necessary :) 
 "set cursorline
