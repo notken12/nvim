@@ -6,7 +6,7 @@ let $TERM="xterm-256color"
 
 set termguicolors
 " Specify a directory for plugins
-call plug#begin('./plugged')
+call plug#begin('$LOCALAPPDATA/vimfiles/plugged')
 
 " Utils
 Plug 'nvim-lua/plenary.nvim'
