@@ -9,3 +9,4 @@ require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules
 require('user.toggleterm')
 require('user.nvim-tree')
 -- require('user.tree').open()
+require('user.tagbar')

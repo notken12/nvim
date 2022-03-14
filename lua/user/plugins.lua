@@ -44,4 +44,8 @@ return require('packer').startup(function()
     },
     -- config = function() require'nvim-tree'.setup {} end
   }
+
+  use {
+    'preservim/tagbar'
+  }
 end)

@@ -50,7 +50,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-commentary'
 
 " Show a pane with an outline of the file
-Plug 'preservim/tagbar'
+" Plug 'preservim/tagbar'
 
 " Dashboard
 Plug 'glepnir/dashboard-nvim'
