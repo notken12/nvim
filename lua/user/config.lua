@@ -1,3 +1,5 @@
+
+
 --lvim.builtin.telescope.defaults.file_ignore_patterns = { ".git", "node_modules" }
 -- require('presence')
 require('user.gitsigns')

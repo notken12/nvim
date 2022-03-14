@@ -1,4 +1,6 @@
-require("toggleterm").setup {
+local toggleterm = require("toggleterm")
+
+toggleterm.setup {
   -- size can be a number or function which is passed the current terminal
   size = function(term)
     if term.direction == "horizontal" then
@@ -7,7 +9,7 @@ require("toggleterm").setup {
       return vim.o.columns * 0.4
     end
   end,
-  open_mapping = [[<F1>]],
+  cmd = "powershell",
   -- on_open = fun(t: Terminal), -- function to run when the terminal opens
   -- on_close = fun(t: Terminal), -- function to run when the terminal closes
   -- on_stdout = fun(t: Terminal, job: number, data: string[], name: string) -- callback for processing output on stdout
@@ -40,3 +42,15 @@ require("toggleterm").setup {
     }
   }
 }
+
+local Terminal = require('toggleterm.terminal').Terminal
+
+local pwsh = Terminal:new({
+  cmd="powershell"
+})
+
+function _pwsh_toggle()
+  pwsh:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<F1>", "<cmd>lua _pwsh_toggle()<CR>", {noremap = true, silent = true})
