@@ -5,7 +5,7 @@ let $TMP="/tmp"
 
 set termguicolors
 " Specify a directory for plugins
-call plug#begin('~/.vim/plugged')
+call plug#begin('./plugged')
 
 " Utils
 Plug 'nvim-lua/plenary.nvim'
