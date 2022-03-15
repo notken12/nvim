@@ -55,4 +55,9 @@ return require('packer').startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+
+  use {
+    'yaegassy/coc-volar',
+    run = 'npm ci'
+  }
 end)
