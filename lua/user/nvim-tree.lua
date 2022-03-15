@@ -112,3 +112,4 @@ nvim_tree.setup {
 } 
 
 nvim_tree.open()
+vim.cmd('wincmd p')

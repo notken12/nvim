@@ -37,6 +37,11 @@ return require('packer').startup(function()
     end,
   })
 
+  -- use {
+  --   'romgrk/barbar.nvim',
+  --   requires = {'kyazdani42/nvim-web-devicons'}
+  -- }
+
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
@@ -60,4 +65,6 @@ return require('packer').startup(function()
     'yaegassy/coc-volar',
     run = 'npm ci'
   }
+
+
 end)
