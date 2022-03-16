@@ -12,6 +12,7 @@ require('user.nvim-tree')
 require('user.bufferline')
 require('user.tree')
 require('user.tagbar')
+require('user.dap')
 -- vim.opt.termguicolors = true
 -- require("bufferline").setup{}
 -- require('bufferline.state').set_offset(30, "Explorer")

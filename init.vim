@@ -1,74 +1,14 @@
 :set mouse=a
-
+:set number
 
 let $TMP="/tmp"
 let $TERM="xterm-256color"
 
 set termguicolors
 " Specify a directory for plugins
-call plug#begin('$LOCALAPPDATA/vimfiles/plugged')
+" call plug#begin('$LOCALAPPDATA/vimfiles/plugged')
 
-" Utils
-Plug 'nvim-lua/plenary.nvim'
-
-" Autocomplete
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" File tree
-" Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-Plug 'ryanoasis/vim-devicons'
-" Plug 'airblade/vim-gitgutter'
-
-" Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
-Plug 'scrooloose/nerdcommenter'
-"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
-Plug 'christoomey/vim-tmux-navigator'
-
-" Color theme
-Plug 'morhetz/gruvbox'
-
-Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
-
-" Status line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Git integration
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-
-" gcc and gc shortcuts for commenting lines
-Plug 'tpope/vim-commentary'
-
-" Show a pane with an outline of the file
-" Plug 'preservim/tagbar'
-
-" Dashboard
-Plug 'glepnir/dashboard-nvim'
-
-" Debugger
-Plug 'mfussenegger/nvim-dap'
-
-" Discord status
-" Plug 'andweeb/presence.nvim'
-
-" File formatting
-" post install (yarn install | npm install) then load plugin only for editing supported files
-" Plug 'prettier/vim-prettier', { 'do': 'npm ci' }
-
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-" Git gutter and line blame
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'lewis6991/gitsigns.nvim'
-" InitPlug 'nvim-lua/plenary.nvim'ialize plugin system
-
-
-call plug#end()
+" call plug#end()
 
 lua require('user.config')
 "lua require('custom/tree')
@@ -83,39 +23,17 @@ nnoremap <silent> <leader>g <cmd>lua require("telescope").extensions.lazygit.laz
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 let g:airline_theme='base16'
-let g:airline#extensions#tabline#enabled = 1
 
+" Press jk to escape 
 inoremap jk <ESC>
-" nmap <C-b> :NERDTreeToggle<CR>
+" Ctrl + N to toggle tree
 nnoremap <C-n> :NvimTreeToggle<CR>
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
 
-" Start NERDTree and put the cursor back in the other window.
-" autocmd VimEnter * NERDTree | wincmd p
-
-let g:NERDTreeGitStatusWithFlags = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:NERDTreeGitStatusNodeColorization = 1
-"let g:NERDTreeColorMapCustom = {
-    "\ "Staged"    : "#0ee375",  
-    "\ "Modified"  : "#d9bf91",  
-    "\ "Renamed"   : "#51C9FC",  
-    "\ "Untracked" : "#FCE77C",  
-    "\ "Unmerged"  : "#FC51E6",  
-    "\ "Dirty"     : "#FFBD61",  
-    "\ "Clean"     : "#87939A",   
-    "\ "Ignored"   : "#808080"
-    "\ }                         
-
-
-
-let g:NERDTreeIgnore = ['^node_modules$']
-
-" augroup DIRCHANGE
-"     au!
-"     autocmd DirChanged global :NERDTreeCWD
-" augroup END
+" Auto refresh tree on cd change
+augroup DIRCHANGE
+    au!
+    autocmd DirChanged global :NvimTreeRefresh
+augroup END
 
 " Note: You must define the dictionary first before setting values.
 " Also, it's a good idea to check whether it exists as to avoid 
@@ -143,21 +61,9 @@ let g:airline#extensions#tabline#left_alt_sep = ''
 " the correct fonts. Try it in vim first and if that fails see the help 
 " pages for vim-airline :help airline-troubleshooting
 
-" vim-prettier
-"let g:prettier#quickfix_enabled = 0
-"let g:prettier#quickfix_auto_focus = 0
+
 " prettier command for coc
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-" run prettier on save
-"let g:prettier#autoformat = 0
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-
-" ctrlp
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" let g:telescope.defaults.file_ignore_patterns = ['node_modules', '.git']
-
-" lua require('telescope')
 
 " Using Lua functions
 nnoremap <C-P> <cmd>lua require('telescope.builtin').git_files()<cr>
@@ -166,7 +72,6 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 
-" lua require('telescope').setup{  defaults = { file_ignore_patterns = { ".git", "node_modules" } }}
 " up/down will move virtual lines (lines that wrap)
 noremap <silent> <expr> <Down> (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> <Up> (v:count == 0 ? 'gk' : 'k')
@@ -188,24 +93,6 @@ colorscheme gruvbox
 
 " Transparent background
 " au VimEnter * hi Normal ctermbg=none
-
-" " sync open file with NERDTree
-" " " Check if NERDTree is open or active
-" function! IsNERDTreeOpen()
-"   return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-" endfunction
-
-" " Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" " file, and we're not in vimdiff
-" function! SyncTree()
-"   if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-"     NERDTreeFind
-"     wincmd p
-"   endif
-" endfunction
-
-" Highlight currently open buffer in NERDTree
-" autocmd BufEnter * call SyncTree()
 
 " coc config
 let g:coc_global_extensions = [
@@ -337,6 +224,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+nnoremap <C-/> gcc
+
 let g:dashboard_default_executive = 'telescope'
 let g:dashboard_custom_header = [
 \ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
@@ -388,35 +277,6 @@ let g:dashboard_custom_header = [
 "set nocursorline
 
 " trasparent end
-" :lua require'dap'.continue()
-
-lua << EOF
-local dap = require('dap')
-dap.adapters.node2 = {
-  type = 'executable',
-  command = 'node',
-  args = {'c:/users/zenco/appdata/local/nvim/vscode-node-debug2/out/src/nodeDebug.js'},
-}
-dap.configurations.javascript = {
-  {
-    name = 'Launch',
-    type = 'node2',
-    request = 'launch',
-    program = '${file}',
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = 'inspector',
-    console = 'integratedTerminal',
-  },
-  {
-    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-    name = 'Attach to process',
-    type = 'node2',
-    request = 'attach',
-    processId = require'dap.utils'.pick_process,
-  },
-}
-EOF
 
 nnoremap <silent> <leader>b :<C-U>lua require'dap'.toggle_breakpoint()<cr>
 nnoremap <silent> <leader>d :<C-U>lua require'dap'.continue()<cr>

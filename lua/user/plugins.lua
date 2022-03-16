@@ -6,9 +6,34 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  
+  -- Status bar
+  use 'vim-airline/vim-airline'
+  use 'vim-airline/vim-airline-themes'
 
+  -- Color theme 👀
+  use 'morhetz/gruvbox'
+  
+  -- tmux navigator
+  use 'christoomey/vim-tmux-navigator'
+  
+  -- git integration
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-rhubarb'
+  
+  -- gcc and gc for commenting lines
+  use 'tpope/vim-commentary'
+
+  -- Dashboard on start
+  use 'glepnir/dashboard-nvim'
+
+  -- Debugger
+  use 'mfussenegger/nvim-dap'
+  
+  -- Tab bar
   use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons'}
-
+  
+  -- Git gutter and blame
   use {
     'lewis6991/gitsigns.nvim',
     requires = {
@@ -19,16 +44,11 @@ return require('packer').startup(function()
     end
     -- tag = 'release' -- To use the latest release
   }
-
-  use {
-    'tanvirtin/vgit.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    }
-  }
-
+  
+  -- Toggle terminal
   use {"akinsho/toggleterm.nvim"}
-
+  
+  -- Ctrl + p search
   use({
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/plenary.nvim" }, { "kdheepak/lazygit.nvim" } },
@@ -36,12 +56,8 @@ return require('packer').startup(function()
         require("telescope").load_extension("lazygit")
     end,
   })
-
-  -- use {
-  --   'romgrk/barbar.nvim',
-  --   requires = {'kyazdani42/nvim-web-devicons'}
-  -- }
-
+  
+  -- File explorer
   use {
     'kyazdani42/nvim-tree.lua',
     requires = {
@@ -49,18 +65,22 @@ return require('packer').startup(function()
     },
     -- config = function() require'nvim-tree'.setup {} end
   }
-
+  
+  -- Code outliner
   use {
     'preservim/tagbar'
   }
-
+  
+  -- Autocomplete
   use {'neoclide/coc.nvim', branch = 'release'}
-
+  
+  -- Syntax parser
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-
+  
+  -- Vue support for COC
   use {
     'yaegassy/coc-volar',
     run = 'npm ci'
