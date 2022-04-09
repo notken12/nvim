@@ -39,6 +39,15 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
+-- Telescope
+-- Open file finder
+keymap("n", "<C-p>", ":Telescope find_files <CR>", opts)
+-- Live grep
+keymap("n", "<C-g>", ":Telescope live_grep <CR>", opts)
+
+-- File explorer
+keymap("n", "<C-b>", ":NvimTreeToggle <CR>", opts)
+
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
