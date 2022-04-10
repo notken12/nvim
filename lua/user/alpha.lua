@@ -28,7 +28,8 @@ local function footer()
 	-- local fortune = handle:read("*a")
 	-- handle:close()
 	-- return fortune
-	return "mogo"
+  local names = { 'mogo', 'mog', 'soug', 'mango' }
+	return "greetings " .. names[ math.random( #names ) ]
 end
 
 dashboard.section.footer.val = footer()
