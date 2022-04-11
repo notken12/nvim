@@ -75,5 +75,4 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
-vim.api.nvim_set_keymap('i', '<C-H>', '<C-W>', {noremap = true})
+-- vim.api.nvim_set_keymap('i', '<C-BS>', '<Esc>caw', {noremap = true})
