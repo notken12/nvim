@@ -61,7 +61,7 @@ return packer.startup(function(use)
   -- use "christoomey/vim-tmux-navigator"
 
   -- Colorschemes
-  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
+  use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "morhetz/gruvbox"
 
   -- cmp plugins

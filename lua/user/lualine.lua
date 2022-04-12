@@ -55,7 +55,8 @@ local progress = function()
 	local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
 	local line_ratio = current_line / total_lines
 	local index = math.ceil(line_ratio * #chars)
-	return chars[index]
+	-- return chars[index]
+  return math.floor(line_ratio * 100 + 0.5) .. "%%"
 end
 
 local spaces = function()
@@ -68,9 +69,6 @@ lualine.setup({
 		theme = "auto",
 		component_separators = {left='', right=''},
 	  section_separators = {left='', right=''},
-    separators = {
-      component = {'', ''}
-    },
 		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 	},
