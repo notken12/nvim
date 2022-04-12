@@ -1,3 +1,10 @@
+# Mogovim
+
+Ken's Neovim config.
+chris@machine's Neovim-from-scratch template + some improvements
+
+Template README:
+
 # Neovim from scratch
 
 Each video will be associated with a branch so checkout the one you are interested in, you can follow along with this [playlist](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ).
