@@ -76,3 +76,11 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- vim.api.nvim_set_keymap('i', '<C-BS>', '<Esc>caw', {noremap = true})
+
+-- vim.cmd("inoremap <C-w> <C-\\><C-o>dB")
+-- vim.cmd("inoremap <C-BS> <C-\\><C-o>db")
+
+-- vim.cmd("imap <C-BS> <C-W>")
+
+vim.cmd("noremap! <C-BS> <C-w>")
+vim.cmd("noremap! <C-h> <C-w>")
