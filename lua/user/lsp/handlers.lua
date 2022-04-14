@@ -60,6 +60,17 @@ local function lsp_highlight_document(client)
   end
 end
 
+    local function lsp_format_on_save(client)
+        -- if client.resolved_capabilities.document_formatting then
+            vim.cmd([[
+            augroup LspFormatting
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+            augroup END
+            ]])
+        -- end
+    end
+
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -85,11 +96,12 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
+  if client.name == "tsserver" or client.name == "volar" then
     client.resolved_capabilities.document_formatting = false
   end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
+  lsp_format_on_save(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
