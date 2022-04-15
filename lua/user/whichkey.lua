@@ -95,6 +95,16 @@ local mappings = {
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  
+  d = {
+    name = "Debug",
+    b = {"<cmd> lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint"},
+    c = {"<cmd> lua require('dap').continue()<CR>", "Start / Continue"},
+    o = {"<cmd> lua require('dap').step_over()<CR>", "Step Over"},
+    i = {"<cmd> lua require('dap').step_into()<CR>", "Step Into"},
+    s = {"<cmd> lua require('dap').repl.open()<CR>", "Inspect State"},
+    t = {"<cmd> lua require('dapui').toggle()<CR>", "Toggle UI"}
+  },
 
   p = {
     name = "Packer",
