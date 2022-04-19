@@ -5,11 +5,11 @@ chris@machine's Neovim-from-scratch template + some improvements
 
 Make Neovim a good dog.
 
-Featuring LSP, code debugging, global statusline, Telescope searching, and bug fixes for chris@machine's config.
+Featuring LSP, code debugging, global statusline, Telescope search, and bug fixes for chris@machine's config.
 
-![./screenshots/editing.png]()
-![./screenshots/debugger.png]()
-![./screenshots/telescope.png]()
+![Editing](screenshots/editing.png)
+![Debugger](screenshots/debugger.png])
+![Telescope search](screenshots/telescope.png)
 
 ## 📦 Install
 
