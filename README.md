@@ -1,9 +1,15 @@
-# Mogovim
+# 🥭 Mogovim
 
 Ken's Neovim config.
 chris@machine's Neovim-from-scratch template + some improvements
 
+Make Neovim a good dog.
+
 Featuring LSP, code debugging, global statusline, Telescope searching, and bug fixes for chris@machine's config.
+
+![./screenshots/editing.png]()
+![./screenshots/debugger.png]()
+![./screenshots/telescope.png]()
 
 ## 📦 Install
 
@@ -19,7 +25,7 @@ git clone https://github.com/notken12/nvim.git ~/.config/nvim
 git clone https://github.com/notken12/nvim.git $env:LOCALAPPDATA/nvim
 ```
 
-## Requirements
+## 📃 Requirements
 
 ### GCC
 
@@ -44,7 +50,7 @@ sudo apt-get install python3.8
 pip install pynvim
 ```
 
-## Use
+## 🪄 Use
 
 Run
 
