@@ -8,7 +8,7 @@ Make Neovim a good dog.
 Featuring LSP, code debugging, global statusline, Telescope search, and bug fixes for chris@machine's config.
 
 ![Editing](screenshots/editing.png)
-![Debugger](screenshots/debugger.png])
+![Debugger](screenshots/debugger.png)
 ![Telescope search](screenshots/telescope.png)
 
 ## 📦 Install
