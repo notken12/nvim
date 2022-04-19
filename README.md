@@ -3,70 +3,66 @@
 Ken's Neovim config.
 chris@machine's Neovim-from-scratch template + some improvements
 
-Template README:
+Featuring LSP, code debugging, global statusline, Telescope searching, and bug fixes for chris@machine's config.
 
-# Neovim from scratch
+## 📦 Install
 
-Each video will be associated with a branch so checkout the one you are interested in, you can follow along with this [playlist](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ).
+### Linux / Mac
 
-## Try out this config
-
-Make sure to remove or move your current `nvim` directory
-
-**IMPORTANT** Requires [Neovim v0.6.0](https://github.com/neovim/neovim/releases/tag/v0.6.0) or [Nightly](https://github.com/neovim/neovim/releases/tag/nightly). 
-```
-git clone https://github.com/LunarVim/Neovim-from-scratch.git ~/.config/nvim
+```bash
+git clone https://github.com/notken12/nvim.git ~/.config/nvim
 ```
 
-Run `nvim` and wait for the plugins to be installed 
+### Windows
 
-**NOTE** (You will notice treesitter pulling in a bunch of parsers the next time you open Neovim) 
-
-## Get healthy
-
-Open `nvim` and enter the following:
-
-```
-:checkhealth
+```bash
+git clone https://github.com/notken12/nvim.git $env:LOCALAPPDATA/nvim
 ```
 
-You'll probably notice you don't have support for copy/paste also that python and node haven't been setup
+## Requirements
 
-So let's fix that
+### GCC
 
-First we'll fix copy/paste
+```bash
+sudo apt update
+sudo apt install gcc
+```
 
-- On mac `pbcopy` should be builtin
+### Node.js
 
-- On Ubuntu
+```bash
+sudo apt update
+sudo apt install nodejs
+npm i -g neovim
+```
 
-  ```
-  sudo apt install xsel
-  ```
+### Python
 
-- On Arch Linux
+```bash
+sudo apt-get update
+sudo apt-get install python3.8
+pip install pynvim
+```
 
-  ```
-  sudo pacman -S xsel
-  ```
+## Use
 
-Next we need to install python support (node is optional)
+Run
 
-- Neovim python support
+```bash
+nvim
+```
 
-  ```
-  pip install pynvim
-  ```
+and let the plugins automatically install.
 
-- Neovim node support
+To add support for a language, run these nvim commands:
 
-  ```
-  npm i -g neovim
-  ```
----
+```
+:TSInstall yourlanguagename
+:LspInstall yourlanguagename
+```
 
-**NOTE** make sure you have [node](https://nodejs.org/en/) installed, I recommend a node manager like [fnm](https://github.com/Schniz/fnm).
+See https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#Javascript for how to add debug adapters for code debugging.
 
-> The computing scientist's main challenge is not to get confused by the complexities of his own making. 
+## 💞 Contribution
 
-\- Edsger W. Dijkstra
+If there's anything missing or something you don't like about this config, feel free to make one. Thank you!
