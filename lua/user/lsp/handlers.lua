@@ -61,14 +61,14 @@ local function lsp_highlight_document(client)
 end
 
     local function lsp_format_on_save(client)
-        -- if client.resolved_capabilities.document_formatting then
+        if client.resolved_capabilities.document_formatting then
             vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
                 autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
             augroup END
             ]])
-        -- end
+        end
     end
 
 local function lsp_keymaps(bufnr)

@@ -7,6 +7,8 @@ end
 
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
+require('rust-tools').setup({})
+require'lspconfig'.rust_analyzer.setup({})
 lsp_installer.on_server_ready(function(server)
 	local opts = {
 		on_attach = require("user.lsp.handlers").on_attach,
@@ -37,7 +39,6 @@ lsp_installer.on_server_ready(function(server)
         server:attach_buffers()
         -- Only if standalone support is needed
         require("rust-tools").start_standalone_if_required()
-        return
     end
 -- This setup() function is exactly the same as lspconfig's setup function.
 	-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
