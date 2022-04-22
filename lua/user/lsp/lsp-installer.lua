@@ -2,7 +2,12 @@ local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 if not status_ok then
 	return
 end
-
+require "lsp_signature".setup({
+   -- bind = true, -- This is mandatory, otherwise border config won't get registered.
+   --  handler_opts = {
+   --    border = "rounded"
+   --  }
+})
 -- local lsp_installer = require("nvim-lsp-installer")
 
 -- Register a handler that will be called for all installed servers.
