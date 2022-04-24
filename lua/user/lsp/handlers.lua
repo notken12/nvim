@@ -35,13 +35,13 @@ M.setup = function()
 
   vim.diagnostic.config(config)
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
+  -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  --   border = "rounded",
+  -- })
 
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
+  -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  --   border = "rounded",
+  -- })
 end
 
 local function lsp_highlight_document(client)
@@ -70,6 +70,17 @@ end
             ]])
         end
     end
+
+local function lsp_hover(client)
+        if client.resolved_capabilities.hover then
+            vim.cmd([[
+            augroup LspHover
+                autocmd! * <buffer>
+                autocmd CursorHold <buffer> lua vim.lsp.buf.hover()
+            augroup END
+            ]])
+        end
+end
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
@@ -102,6 +113,7 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
   lsp_format_on_save(client)
+  lsp_hover(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

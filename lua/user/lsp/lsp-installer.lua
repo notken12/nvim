@@ -8,7 +8,6 @@ require "lsp_signature".setup({
    --    border = "rounded"
    --  }
 })
--- local lsp_installer = require("nvim-lsp-installer")
 
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
