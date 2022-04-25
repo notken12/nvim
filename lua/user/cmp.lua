@@ -94,18 +94,21 @@ cmp.setup {
       "s",
     }),
   },
+   
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- Kind icons
+      -- vim_item.abbr = ' ' .. vim_item.abbr
+      -- vim_item.menu = (vim_item.menu or '') .. ' '
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
-      })[entry.source.name]
+      -- vim_item.menu = ({
+      --   nvim_lsp = "[LSP]",
+      --   luasnip = "[Snippet]",
+      --   buffer = "[Buffer]",
+      --   path = "[Path]",
+      -- })[entry.source.name]
       return vim_item
     end,
   },
@@ -123,9 +126,31 @@ cmp.setup {
     documentation = {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },
+    -- completion = {
+    --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    -- },
   },
   experimental = {
-    ghost_text = false,
+    ghost_text = true,
     native_menu = false,
   },
 }
+
+-- vim.cmd([[
+-- " gray
+-- highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+-- " blue
+-- highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+-- highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+-- " light blue
+-- highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+-- highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+-- highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+-- " pink
+-- highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+-- highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+-- " front
+-- highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+-- highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+-- highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+-- ]])

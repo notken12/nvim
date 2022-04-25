@@ -14,8 +14,8 @@ M.setup = function()
   end
 
   local config = {
-    -- disable virtual text
-    virtual_text = false,
+    -- enable virtual text
+    virtual_text = true,
     -- show signs
     signs = {
       active = signs,
@@ -35,13 +35,13 @@ M.setup = function()
 
   vim.diagnostic.config(config)
 
-  -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  --   border = "rounded",
-  -- })
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded",
+  })
 
-  -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  --   border = "rounded",
-  -- })
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "rounded",
+  })
 end
 
 local function lsp_highlight_document(client)
@@ -113,7 +113,7 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
   lsp_format_on_save(client)
-  lsp_hover(client)
+  -- lsp_hover(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

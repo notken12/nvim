@@ -33,9 +33,11 @@ local diagnostics = {
 local diff = {
 	"diff",
 	colored = true,
-	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+	symbols = { added = "+ ", modified = " ", removed = "- " }, -- changes diff symbols
   cond = hide_in_width
 }
+
+
 
 local mode = {
 	"mode",
@@ -46,7 +48,7 @@ local mode = {
 
 local filetype = {
 	"filetype",
-	icons_enabled = false,
+	icons_enabled = true,
 	icon = nil,
 }
 
@@ -89,8 +91,8 @@ local lsp_progress = {
 		message = { commenced = 'In Progress', completed = 'Completed' },
 	},
 	display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' } },
-	timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
-	spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' },
+	timer = { progress_enddelay = 500, spinner = 200, lsp_client_name_enddelay = 1000 },
+	spinner_symbols = { '⠟ ', '⠯ ', '⠷ ', '⠾ ', '⠽ ', '⠻ '},
 }
 
 -- cool function for progress
@@ -114,7 +116,7 @@ lualine.setup({
 		theme = "auto",
 		component_separators = {left='', right=''},
 	  section_separators = {left='', right=''},
-		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+		-- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 	},
 	sections = {
@@ -123,9 +125,9 @@ lualine.setup({
 		lualine_c = { mode, lsp_progress },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		-- lualine_x = { diff, spaces, "encoding", filetype },
-		lualine_x = { diff, spaces, filetype },
-		lualine_y = { location },
-		lualine_z = { progress },
+		lualine_x = { diff },
+		lualine_y = { filetype },
+		lualine_z = { location },
 	},
 	inactive_sections = {
 		lualine_a = {},

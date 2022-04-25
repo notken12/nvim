@@ -4,7 +4,7 @@ vim.cmd [[
     autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
     autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200}) 
     autocmd BufWinEnter * :set formatoptions-=cro
-    autocmd BufWinEnter * :set laststatus=3
+    autocmd BufEnter * :set laststatus=3
     autocmd FileType qf set nobuflisted
   augroup end
 
@@ -30,8 +30,6 @@ vim.cmd [[
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
 
-  "   inoremap <C-c> <Esc>
-  " autocmd CursorHold * lua vim.lsp.buf.hover()
 ]]
 
 
