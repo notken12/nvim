@@ -44,7 +44,6 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "JoosepAlviste/nvim-ts-context-commentstring"
   use "kyazdani42/nvim-web-devicons"
@@ -56,7 +55,11 @@ return packer.startup(function(use)
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
-  use "lukas-reineke/indent-blankline.nvim"
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    config = function () require("user.indentline") end
+  }
   use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
@@ -65,21 +68,28 @@ return packer.startup(function(use)
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "gruvbox-community/gruvbox"
-  -- use 'Mofiqul/vscode.nvim'
-  use 'martinsione/darkplus.nvim'
-  
+  use 'Mofiqul/vscode.nvim'
+  -- use 'lunarvim/darkplus.nvim'
+  -- use 'martinsione/darkplus.nvim'
+  -- use '~/dev/vscode.nvim'
+
   -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
-  use "ray-x/lsp_signature.nvim" -- function signature
+  use {"hrsh7th/nvim-cmp", after="friendly-snippets", config = function () require('user.cmp') end } -- The completion plugin
+  use {"windwp/nvim-autopairs", after="nvim-cmp", config = function () require('user.autopairs') end } -- Autopairs, integrates with both cmp and treesitter
+  use {"saadparwaiz1/cmp_luasnip", after="LuaSnip"} -- snippet completions
+  use {"hrsh7th/cmp-nvim-lsp"}
+  use {"hrsh7th/cmp-buffer", after="nvim-cmp"}  -- buffer completions
+  use {"hrsh7th/cmp-path", after="cmp-buffer"} -- path completions
+  use {"hrsh7th/cmp-cmdline", after="nvim-cmp"} -- cmdline completions
+  use {"ray-x/lsp_signature.nvim", after="nvim-cmp", config = function() require ('user.lua-signature') end} -- function signature
 
   -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  use {
+    "rafamadriz/friendly-snippets",
+    event = "InsertEnter"
+  } -- a bunch of snippets to use
+  use {"L3MON4D3/LuaSnip", after="nvim-cmp",
+  } --snippet engine
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
@@ -97,6 +107,7 @@ return packer.startup(function(use)
   }
 
   -- Git
+  use "tpope/vim-fugitive"
   use "lewis6991/gitsigns.nvim"
 
   -- Rust tools
@@ -106,7 +117,10 @@ return packer.startup(function(use)
   use "mfussenegger/nvim-dap"
   use "theHamsta/nvim-dap-virtual-text"
   use "nvim-telescope/telescope-dap.nvim"
-use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
+  -- Startup time profiling
+  use "dstein64/vim-startuptime"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
