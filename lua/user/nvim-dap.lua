@@ -27,3 +27,9 @@ dap.configurations.javascript = {
     processId = require'dap.utils'.pick_process,
   },
 }
+
+local status_ok, telescope = pcall(require, "telescope")
+if not status_ok then
+  return
+end
+

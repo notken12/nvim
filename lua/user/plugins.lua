@@ -44,25 +44,42 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "numToStr/Comment.nvim" -- Easily comment stuff
-  use "JoosepAlviste/nvim-ts-context-commentstring"
+  
+  use {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    event = {"BufRead", "BufNewFile"},
+  }
+
+  use {
+    "numToStr/Comment.nvim", -- Easily comment stuff
+    after = "nvim-ts-context-commentstring",
+    config = function ()
+      require ('user.comment')
+    end
+  }
+
   use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
-  use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"
+  use {"kyazdani42/nvim-tree.lua", config = function() require('user.nvim-tree') end}
+  
+  use {"akinsho/bufferline.nvim", config = function() require('user.bufferline') end}
+  use {"moll/vim-bbye", event = "BufRead"}
+  
+  use {"nvim-lualine/lualine.nvim", config = function ()
+    require('user.lualine')
+  end}
   use 'arkav/lualine-lsp-progress'
-  use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
+  use {"akinsho/toggleterm.nvim", event="VimEnter", config = function () require('user.toggleterm') end}
+  use {"ahmedkhalf/project.nvim", event="VimEnter", config = function () require ('user.project') end }
+  use {"lewis6991/impatient.nvim", config = function() require('user.impatient') end}
+
   use {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufRead",
     config = function () require("user.indentline") end
   }
-  use "goolord/alpha-nvim"
+  use {"goolord/alpha-nvim", config = function () require ('user.alpha') end }
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "folke/which-key.nvim"
+  use {"folke/which-key.nvim", config = function () require ('user.whichkey') end }
   -- use "christoomey/vim-tmux-navigator"
 
   -- Colorschemes
@@ -99,25 +116,47 @@ return packer.startup(function(use)
   use {"jose-elias-alvarez/null-ls.nvim"} -- for formatters and linters
 
   -- Telescope
-  use "nvim-telescope/telescope.nvim"
+  use {
+    "nvim-telescope/telescope.nvim", 
+    event = "VimEnter", 
+    config = function() require('user.telescope') end
+  }
 
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
+    event = {"BufRead", "BufNewFile"},
+    config = function () require ('user.treesitter') end
   }
 
   -- Git
-  use "tpope/vim-fugitive"
-  use "lewis6991/gitsigns.nvim"
+  -- use "tpope/vim-fugitive"
+  use {
+    "lewis6991/gitsigns.nvim",
+    event = {"BufRead", "BufNewFile"},
+    config = function () require('user.gitsigns') end 
+  }
 
   -- Rust tools
-  use "simrat39/rust-tools.nvim"
+  use {"simrat39/rust-tools.nvim", event = {"BufRead", "BufNewFile"}}
 
   -- Debugging
-  use "mfussenegger/nvim-dap"
-  use "theHamsta/nvim-dap-virtual-text"
-  use "nvim-telescope/telescope-dap.nvim"
+  use {
+    "mfussenegger/nvim-dap",
+    event={"BufRead", "BufNewFile"},
+    config = function() require('user.nvim-dap') end
+  }
+  use {
+    "theHamsta/nvim-dap-virtual-text",
+    after = "nvim-dap",
+    config = function () require('user.nvim-dap-virtual-text') end
+  }
+  use {
+    "nvim-telescope/telescope-dap.nvim",
+    after = "nvim-dap",
+    config = function () require('user.telescope-dap') end
+  }
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   -- Startup time profiling
