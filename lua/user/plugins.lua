@@ -77,7 +77,7 @@ return packer.startup(function(use)
   use {"hrsh7th/nvim-cmp", after="friendly-snippets", config = function () require('user.cmp') end } -- The completion plugin
   use {"windwp/nvim-autopairs", after="nvim-cmp", config = function () require('user.autopairs') end } -- Autopairs, integrates with both cmp and treesitter
   use {"saadparwaiz1/cmp_luasnip", after="LuaSnip"} -- snippet completions
-  use {"hrsh7th/cmp-nvim-lsp"}
+  use {"hrsh7th/cmp-nvim-lsp", after="cmp_luasnip"}
   use {"hrsh7th/cmp-buffer", after="nvim-cmp"}  -- buffer completions
   use {"hrsh7th/cmp-path", after="cmp-buffer"} -- path completions
   use {"hrsh7th/cmp-cmdline", after="nvim-cmp"} -- cmdline completions
@@ -92,10 +92,11 @@ return packer.startup(function(use)
   } --snippet engine
 
   -- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
-  use {"williamboman/nvim-lsp-installer", commit ="e65e4966e1b3db486ae548a5674f20a8416a42d0"} -- simple to use language server installer
-  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use {"neovim/nvim-lspconfig", after="cmp-nvim-lsp", config = function () require('user.lsp') end} -- enable LSP
+  use {"williamboman/nvim-lsp-installer", commit ="e65e4966e1b3db486ae548a5674f20a8416a42d0", after="nvim-cmp", 
+  } -- simple to use language server installer
+  use {"tamago324/nlsp-settings.nvim", after="nvim-cmp"} -- language server settings defined in json for
+  use {"jose-elias-alvarez/null-ls.nvim"} -- for formatters and linters
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
