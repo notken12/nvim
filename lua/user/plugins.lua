@@ -29,6 +29,15 @@ if not status_ok then
   return
 end
 
+function packer_lazy_load (plugin, timer)
+   if plugin then
+      timer = timer or 0
+      vim.defer_fn(function()
+         require('packer').loader(plugin)
+      end, 0)
+   end
+end
+
 -- Have packer use a popup window
 packer.init {
   display = {
@@ -38,20 +47,29 @@ packer.init {
   },
 }
 
+
 -- Install your plugins here
 return packer.startup(function(use)
   -- My plugins here
+  use {
+    "lewis6991/impatient.nvim", 
+    -- config = function() require('user.impatient') end
+  }
+
   use "wbthomason/packer.nvim" -- Have packer manage itself
+  
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   
   use {
     "JoosepAlviste/nvim-ts-context-commentstring",
-    event = {"BufRead", "BufNewFile"},
+    keys = {'gcc', 'gc'},
+    -- event = {"BufRead", "BufNewFile"},
   }
 
   use {
     "numToStr/Comment.nvim", -- Easily comment stuff
+    -- keys = {'gcc', 'gc'},
     after = "nvim-ts-context-commentstring",
     config = function ()
       require ('user.comment')
@@ -64,13 +82,29 @@ return packer.startup(function(use)
   use {"akinsho/bufferline.nvim", config = function() require('user.bufferline') end}
   use {"moll/vim-bbye", event = "BufRead"}
   
-  use {"nvim-lualine/lualine.nvim", config = function ()
-    require('user.lualine')
-  end}
+  use {
+    "nvim-lualine/lualine.nvim", 
+    config = function ()
+      require('user.lualine')
+    end
+  }
   use 'arkav/lualine-lsp-progress'
-  use {"akinsho/toggleterm.nvim", event="VimEnter", config = function () require('user.toggleterm') end}
-  use {"ahmedkhalf/project.nvim", event="VimEnter", config = function () require ('user.project') end }
-  use {"lewis6991/impatient.nvim", config = function() require('user.impatient') end}
+  
+  use {
+    "akinsho/toggleterm.nvim",
+    opt = true,
+    -- event="VimEnter", 
+    setup = function () packer_lazy_load 'toggleterm.nvim' end,
+    config = function () require('user.toggleterm') end,
+  }
+  
+  use {
+    "ahmedkhalf/project.nvim", 
+    opt = true,
+    -- event="VimEnter", 
+    setup = function () packer_lazy_load 'project.nvim' end,
+    config = function () require ('user.project') end,
+  }
 
   use {
     "lukas-reineke/indent-blankline.nvim",
@@ -98,7 +132,6 @@ return packer.startup(function(use)
   use {"hrsh7th/cmp-buffer", after="nvim-cmp"}  -- buffer completions
   use {"hrsh7th/cmp-path", after="cmp-buffer"} -- path completions
   use {"hrsh7th/cmp-cmdline", after="nvim-cmp"} -- cmdline completions
-  use {"ray-x/lsp_signature.nvim", after="nvim-cmp", config = function() require ('user.lua-signature') end} -- function signature
 
   -- snippets
   use {
@@ -109,16 +142,40 @@ return packer.startup(function(use)
   } --snippet engine
 
   -- LSP
-  use {"neovim/nvim-lspconfig", after="cmp-nvim-lsp", config = function () require('user.lsp') end} -- enable LSP
-  use {"williamboman/nvim-lsp-installer", commit ="e65e4966e1b3db486ae548a5674f20a8416a42d0", after="nvim-cmp", 
-  } -- simple to use language server installer
+  use {
+    "neovim/nvim-lspconfig", 
+    opt = true,
+    -- after="cmp-nvim-lsp", 
+    setup = function() 
+      packer_lazy_load("nvim-lspconfig", 0)
+       -- reload the current file so lsp actually starts for it
+       vim.defer_fn(function()
+          vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
+       end, 0)
+    end,
+    config = function () 
+      require('user.lsp') 
+    end
+  } -- enable LSP
+  
+  use {"ray-x/lsp_signature.nvim", after="nvim-lspconfig", config = function() require ('user.lua-signature') end} -- function signature
+  
+  use {
+    "williamboman/nvim-lsp-installer",  -- simple to use language server installer
+    -- commit ="e65e4966e1b3db486ae548a5674f20a8416a42d0", 
+    after="nvim-cmp", 
+  }
   use {"tamago324/nlsp-settings.nvim", after="nvim-cmp"} -- language server settings defined in json for
   use {"jose-elias-alvarez/null-ls.nvim"} -- for formatters and linters
 
   -- Telescope
   use {
-    "nvim-telescope/telescope.nvim", 
-    event = "VimEnter", 
+    "nvim-telescope/telescope.nvim",
+    opt = true,
+    -- event = "VimEnter",
+    setup = function ()
+      packer_lazy_load("telescope.nvim")
+    end,
     config = function() require('user.telescope') end
   }
 
@@ -134,8 +191,12 @@ return packer.startup(function(use)
   -- use "tpope/vim-fugitive"
   use {
     "lewis6991/gitsigns.nvim",
-    event = {"BufRead", "BufNewFile"},
-    config = function () require('user.gitsigns') end 
+    opt = true,
+    -- event = {"BufRead", "BufNewFile"},
+    setup = function()
+       packer_lazy_load("gitsigns.nvim", 0)
+    end,
+    config = function () require('user.gitsigns') end,
   }
 
   -- Rust tools
@@ -154,7 +215,7 @@ return packer.startup(function(use)
   }
   use {
     "nvim-telescope/telescope-dap.nvim",
-    after = "nvim-dap",
+    after = {"nvim-dap", "telescope.nvim"},
     config = function () require('user.telescope-dap') end
   }
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
