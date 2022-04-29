@@ -3,7 +3,6 @@ if not status_ok then
 	return
 end
 
-print("lsp installer")
 lsp_installer.setup()
 
 local status_ok, lspconfig = pcall(require, "lspconfig")
@@ -17,7 +16,6 @@ for _i, server in pairs(servers) do
 		on_attach = require("user.lsp.handlers").on_attach,
 		capabilities = require("user.lsp.handlers").capabilities,
 	}
-	print(server.name)
 	if server.name == "jsonls" then
 		local jsonls_opts = require("user.lsp.settings.jsonls")
 		opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
