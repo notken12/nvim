@@ -9,15 +9,15 @@ end
 
 -- Color for highlights
 local colors = {
-  yellow = '#ECBE7B',
-  cyan = '#008080',
-  darkblue = '#081633',
-  green = '#98be65',
-  orange = '#FF8800',
-  violet = '#a9a1e1',
-  magenta = '#c678dd',
-  blue = '#51afef',
-  red = '#ec5f67'
+	yellow = "#ECBE7B",
+	cyan = "#008080",
+	darkblue = "#081633",
+	green = "#98be65",
+	orange = "#FF8800",
+	violet = "#a9a1e1",
+	magenta = "#c678dd",
+	blue = "#51afef",
+	red = "#ec5f67",
 }
 
 local diagnostics = {
@@ -34,10 +34,8 @@ local diff = {
 	"diff",
 	colored = true,
 	symbols = { added = "+ ", modified = " ", removed = "- " }, -- changes diff symbols
-  cond = hide_in_width
+	cond = hide_in_width,
 }
-
-
 
 local mode = {
 	"mode",
@@ -53,7 +51,7 @@ local filetype = {
 }
 
 local filename = {
-  "filename"
+	"filename",
 }
 
 local branch = {
@@ -68,8 +66,8 @@ local location = {
 }
 
 local lsp_progress = {
-  "lsp_progress",
-	display_components = { 'lsp_client_name', { 'title', 'percentage', 'message' }},
+	"lsp_progress",
+	display_components = { "lsp_client_name", { "title", "percentage", "message" } },
 	-- With spinner
 	-- display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
 	-- colors = {
@@ -81,18 +79,18 @@ local lsp_progress = {
 	--   use = true,
 	-- },
 	separators = {
-		component = ' ',
-		progress = ' | ',
-		message = { pre = '(', post = ')'},
-		percentage = { pre = '', post = '%% ' },
-		title = { pre = '', post = ': ' },
-		lsp_client_name = { pre = '[', post = ']' },
-		spinner = { pre = '', post = '' },
-		message = { commenced = 'In Progress', completed = 'Completed' },
+		component = " ",
+		progress = " | ",
+		message = { pre = "(", post = ")" },
+		percentage = { pre = "", post = "%% " },
+		title = { pre = "", post = ": " },
+		lsp_client_name = { pre = "[", post = "]" },
+		spinner = { pre = "", post = "" },
+		message = { commenced = "In Progress", completed = "Completed" },
 	},
-	display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' } },
+	display_components = { "lsp_client_name", "spinner", { "title", "percentage", "message" } },
 	timer = { progress_enddelay = 500, spinner = 200, lsp_client_name_enddelay = 1000 },
-	spinner_symbols = { '⠟ ', '⠯ ', '⠷ ', '⠾ ', '⠽ ', '⠻ '},
+	spinner_symbols = { "⠟ ", "⠯ ", "⠷ ", "⠾ ", "⠽ ", "⠻ " },
 }
 
 -- cool function for progress
@@ -103,7 +101,7 @@ local progress = function()
 	local line_ratio = current_line / total_lines
 	local index = math.ceil(line_ratio * #chars)
 	-- return chars[index]
-  return math.floor(line_ratio * 100 + 0.5) .. "%%"
+	return math.floor(line_ratio * 100 + 0.5) .. "%%"
 end
 
 local spaces = function()
@@ -114,8 +112,8 @@ lualine.setup({
 	options = {
 		icons_enabled = true,
 		theme = "auto",
-		component_separators = {left='', right=''},
-	  section_separators = {left='', right=''},
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
 		-- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 	},

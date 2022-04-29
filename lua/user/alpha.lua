@@ -5,14 +5,14 @@ end
 
 local dashboard = require("alpha.themes.dashboard")
 dashboard.section.header.val = {
-[[                                  _           ]],
-[[                                 (_)          ]],
-[[ _ __ ___   ___   __ _  _____   ___ _ __ ___  ]],
-[[| '_ ` _ \ / _ \ / _` |/ _ \ \ / / | '_ ` _ \ ]],
-[[| | | | | | (_) | (_| | (_) \ V /| | | | | | |]],
-[[|_| |_| |_|\___/ \__, |\___/ \_/ |_|_| |_| |_|]],
-[[                  __/ |                       ]],
-[[                 |___/                        ]]
+	[[                                  _           ]],
+	[[                                 (_)          ]],
+	[[ _ __ ___   ___   __ _  _____   ___ _ __ ___  ]],
+	[[| '_ ` _ \ / _ \ / _` |/ _ \ \ / / | '_ ` _ \ ]],
+	[[| | | | | | (_) | (_| | (_) \ V /| | | | | | |]],
+	[[|_| |_| |_|\___/ \__, |\___/ \_/ |_|_| |_| |_|]],
+	[[                  __/ |                       ]],
+	[[                 |___/                        ]],
 }
 dashboard.section.buttons.val = {
 	dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
@@ -25,14 +25,14 @@ dashboard.section.buttons.val = {
 }
 
 local function footer()
--- NOTE: requires the fortune-mod package to work
+	-- NOTE: requires the fortune-mod package to work
 	-- local handle = io.popen("fortune")
 	-- local fortune = handle:read("*a")
 	-- handle:close()
 	-- return fortune
-  local names = { 'mogo', 'mog', 'soug', 'mango' }
-	return "⚡ greetings " .. names[ math.random( #names ) ] .. "  "
-  -- return "⚡ mogo ⚡ "
+	local names = { "mogo", "mog", "soug", "mango" }
+	return "⚡ greetings " .. names[math.random(#names)] .. "  "
+	-- return "⚡ mogo ⚡ "
 end
 
 dashboard.section.footer.val = footer()
