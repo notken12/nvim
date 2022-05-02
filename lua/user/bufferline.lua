@@ -17,8 +17,8 @@ bufferline.setup({
 		buffer_close_icon = "",
 		-- buffer_close_icon = '',
 		modified_icon = "●",
-		close_icon = "",
-		-- close_icon = '',
+		-- close_icon = "",
+		close_icon = "",
 		left_trunc_marker = "",
 		right_trunc_marker = "",
 		--- name_formatter can be used to change the buffer's label in the bufferline.
@@ -64,6 +64,7 @@ bufferline.setup({
 		-- can also be a table containing 2 custom separators
 		-- [focused and unfocused]. eg: { '|', '|' }
 		separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
+		-- separator_style = { "", "" },
 		enforce_regular_tabs = true,
 		always_show_bufferline = true,
 		-- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)

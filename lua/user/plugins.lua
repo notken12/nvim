@@ -102,7 +102,6 @@ return packer.startup(function(use)
 	use({
 		"akinsho/toggleterm.nvim",
 		opt = true,
-		-- event="VimEnter",
 		setup = function()
 			packer_lazy_load("toggleterm.nvim")
 		end,
@@ -114,7 +113,6 @@ return packer.startup(function(use)
 	use({
 		"ahmedkhalf/project.nvim",
 		opt = true,
-		-- event="VimEnter",
 		setup = function()
 			packer_lazy_load("project.nvim")
 		end,
@@ -221,7 +219,6 @@ return packer.startup(function(use)
 	use({
 		"nvim-telescope/telescope.nvim",
 		opt = true,
-		-- event = "VimEnter",
 		setup = function()
 			packer_lazy_load("telescope.nvim")
 		end,
@@ -238,6 +235,10 @@ return packer.startup(function(use)
 		config = function()
 			require("user.treesitter")
 		end,
+	})
+	use({
+		"David-Kunz/treesitter-unit",
+		after = "nvim-treesitter",
 	})
 
 	-- Git
