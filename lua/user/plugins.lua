@@ -2,7 +2,8 @@ local fn = vim.fn
 
 -- Automatically install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
+local install_path_opt = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+if fn.empty(fn.glob(install_path)) > 0 and fn.empty(fn.glob(install_path_opt)) > 0 then
 	PACKER_BOOTSTRAP = fn.system({
 		"git",
 		"clone",
@@ -33,13 +34,17 @@ function packer_lazy_load(plugin, timer)
 	if plugin then
 		timer = timer or 0
 		vim.defer_fn(function()
-			require("packer").loader(plugin)
+			packer.loader(plugin)
 		end, 0)
 	end
 end
 
 -- Have packer use a popup window
 packer.init({
+	-- profile = {
+	-- 	enable = true,
+	-- 	threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+	-- },
 	display = {
 		open_fn = function()
 			return require("packer.util").float({ border = "rounded" })
@@ -55,7 +60,7 @@ return packer.startup(function(use)
 		-- config = function() require('user.impatient') end
 	})
 
-	use("wbthomason/packer.nvim") -- Have packer manage itself
+	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
 
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
@@ -78,6 +83,11 @@ return packer.startup(function(use)
 	use("kyazdani42/nvim-web-devicons")
 	use({
 		"kyazdani42/nvim-tree.lua",
+		-- event = "VimEnter",
+		opt = true,
+		setup = function()
+			packer_lazy_load("nvim-tree.lua")
+		end,
 		config = function()
 			require("user.nvim-tree")
 		end,
@@ -85,6 +95,10 @@ return packer.startup(function(use)
 
 	use({
 		"akinsho/bufferline.nvim",
+		event = "VimEnter",
+		setup = function()
+			packer_lazy_load("bufferline.nvim")
+		end,
 		config = function()
 			require("user.bufferline")
 		end,
@@ -93,6 +107,10 @@ return packer.startup(function(use)
 
 	use({
 		"nvim-lualine/lualine.nvim",
+		opt = true,
+		setup = function()
+			packer_lazy_load("lualine.nvim")
+		end,
 		config = function()
 			require("user.lualine")
 		end,
@@ -137,6 +155,10 @@ return packer.startup(function(use)
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use({
 		"folke/which-key.nvim",
+		event = "VimEnter",
+		setup = function()
+			packer_lazy_load("which-key.nvim")
+		end,
 		config = function()
 			require("user.whichkey")
 		end,
@@ -246,9 +268,9 @@ return packer.startup(function(use)
 	use({
 		"lewis6991/gitsigns.nvim",
 		opt = true,
-		-- event = {"BufRead", "BufNewFile"},
+		event = { "BufRead", "BufNewFile" },
 		setup = function()
-			packer_lazy_load("gitsigns.nvim", 0)
+			packer_lazy_load("gitsigns.nvim")
 		end,
 		config = function()
 			require("user.gitsigns")
@@ -262,6 +284,9 @@ return packer.startup(function(use)
 	use({
 		"mfussenegger/nvim-dap",
 		event = { "BufRead", "BufNewFile" },
+		setup = function()
+			packer_lazy_load("nvim-dap")
+		end,
 		config = function()
 			require("user.nvim-dap")
 		end,
@@ -280,10 +305,16 @@ return packer.startup(function(use)
 			require("user.telescope-dap")
 		end,
 	})
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, after = "nvim-dap" })
 
 	-- Startup time profiling
-	use("dstein64/vim-startuptime")
+	use({
+		"dstein64/vim-startuptime",
+		opt = true,
+		setup = function()
+			packer_lazy_load("vim-startuptime")
+		end,
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

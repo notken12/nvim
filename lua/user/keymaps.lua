@@ -43,7 +43,7 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- Open file finder
 keymap("n", "<C-p>", ":Telescope find_files <CR>", opts)
 -- Live grep
-keymap("n", "<C-g>", ":Telescope live_grep <CR>", opts)
+-- keymap("n", "<C-g>", ":Telescope live_grep <CR>", opts)
 
 -- File explorer
 keymap("n", "<C-e>", ":NvimTreeToggle <CR>", opts)
