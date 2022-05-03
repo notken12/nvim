@@ -60,10 +60,10 @@ return packer.startup(function(use)
 		-- config = function() require('user.impatient') end
 	})
 
-	use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
-
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
+
+	use({ "wbthomason/packer.nvim", event = "VimEnter" }) -- Have packer manage itself
 
 	use({
 		"JoosepAlviste/nvim-ts-context-commentstring",
@@ -79,15 +79,25 @@ return packer.startup(function(use)
 			require("user.comment")
 		end,
 	})
+	-- Colorschemes
+	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
+	-- use("gruvbox-community/gruvbox")
+	use({
+		"Mofiqul/vscode.nvim",
+		after = "packer.nvim",
+		config = function()
+			require("user.colorscheme")
+		end,
+	})
+	-- use 'lunarvim/darkplus.nvim'
+	-- use 'martinsione/darkplus.nvim'
+	-- use '~/dev/vscode.nvim'
 
-	use("kyazdani42/nvim-web-devicons")
+	use({ "kyazdani42/nvim-web-devicons", after = "vscode.nvim" })
 	use({
 		"kyazdani42/nvim-tree.lua",
-		-- event = "VimEnter",
-		opt = true,
-		setup = function()
-			packer_lazy_load("nvim-tree.lua")
-		end,
+		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+
 		config = function()
 			require("user.nvim-tree")
 		end,
@@ -95,19 +105,17 @@ return packer.startup(function(use)
 
 	use({
 		"akinsho/bufferline.nvim",
-		event = "VimEnter",
-		setup = function()
-			packer_lazy_load("bufferline.nvim")
-		end,
+		after = "nvim-web-devicons",
 		config = function()
 			require("user.bufferline")
 		end,
 	})
-	use({ "moll/vim-bbye", event = "BufRead" })
+	use({ "moll/vim-bbye", cmd = { "Bdelete", "Bwipeout" } })
 
 	use({
 		"nvim-lualine/lualine.nvim",
 		opt = true,
+		after = "nvim-web-devicons",
 		setup = function()
 			packer_lazy_load("lualine.nvim")
 		end,
@@ -119,10 +127,7 @@ return packer.startup(function(use)
 
 	use({
 		"akinsho/toggleterm.nvim",
-		opt = true,
-		setup = function()
-			packer_lazy_load("toggleterm.nvim")
-		end,
+		cmd = "ToggleTerm",
 		config = function()
 			require("user.toggleterm")
 		end,
@@ -130,10 +135,7 @@ return packer.startup(function(use)
 
 	use({
 		"ahmedkhalf/project.nvim",
-		opt = true,
-		setup = function()
-			packer_lazy_load("project.nvim")
-		end,
+		after = "telescope.nvim",
 		config = function()
 			require("user.project")
 		end,
@@ -152,10 +154,10 @@ return packer.startup(function(use)
 			require("user.alpha")
 		end,
 	})
-	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
+	use({ "antoinemadec/FixCursorHold.nvim", after = "packer.nvim" }) -- This is needed to fix lsp doc highlight
 	use({
 		"folke/which-key.nvim",
-		event = "VimEnter",
+		after = "nvim-web-devicons",
 		setup = function()
 			packer_lazy_load("which-key.nvim")
 		end,
@@ -164,14 +166,6 @@ return packer.startup(function(use)
 		end,
 	})
 	-- use "christoomey/vim-tmux-navigator"
-
-	-- Colorschemes
-	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-	use("gruvbox-community/gruvbox")
-	use("Mofiqul/vscode.nvim")
-	-- use 'lunarvim/darkplus.nvim'
-	-- use 'martinsione/darkplus.nvim'
-	-- use '~/dev/vscode.nvim'
 
 	-- cmp plugins
 	use({
@@ -240,10 +234,7 @@ return packer.startup(function(use)
 	-- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
-		opt = true,
-		setup = function()
-			packer_lazy_load("telescope.nvim")
-		end,
+		cmd = "Telescope",
 		config = function()
 			require("user.telescope")
 		end,
@@ -268,7 +259,6 @@ return packer.startup(function(use)
 	use({
 		"lewis6991/gitsigns.nvim",
 		opt = true,
-		event = { "BufRead", "BufNewFile" },
 		setup = function()
 			packer_lazy_load("gitsigns.nvim")
 		end,
@@ -283,10 +273,7 @@ return packer.startup(function(use)
 	-- Debugging
 	use({
 		"mfussenegger/nvim-dap",
-		event = { "BufRead", "BufNewFile" },
-		setup = function()
-			packer_lazy_load("nvim-dap")
-		end,
+		module = "dap",
 		config = function()
 			require("user.nvim-dap")
 		end,
@@ -310,10 +297,7 @@ return packer.startup(function(use)
 	-- Startup time profiling
 	use({
 		"dstein64/vim-startuptime",
-		opt = true,
-		setup = function()
-			packer_lazy_load("vim-startuptime")
-		end,
+		cmd = "StartupTime",
 	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
