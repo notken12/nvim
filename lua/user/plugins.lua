@@ -41,10 +41,10 @@ end
 
 -- Have packer use a popup window
 packer.init({
-	-- profile = {
-	-- 	enable = true,
-	-- 	threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
-	-- },
+	profile = {
+		enable = true,
+		threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+	},
 	display = {
 		open_fn = function()
 			return require("packer.util").float({ border = "rounded" })
@@ -115,7 +115,8 @@ return packer.startup(function(use)
 	use({
 		"nvim-lualine/lualine.nvim",
 		opt = true,
-		after = "nvim-web-devicons",
+		-- event = "VimEnter",
+		-- after = "nvim-web-devicons",
 		setup = function()
 			packer_lazy_load("lualine.nvim")
 		end,
