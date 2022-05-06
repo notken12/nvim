@@ -188,6 +188,8 @@ return packer.startup(function(use)
 	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- buffer completions
 	use({ "hrsh7th/cmp-path", after = "cmp-buffer" }) -- path completions
 	use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- cmdline completions
+	use({ "hrsh7th/cmp-calc", after = "nvim-cmp" }) -- math completions
+	use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }) -- display function signature
 
 	-- snippets
 	use({
@@ -213,13 +215,13 @@ return packer.startup(function(use)
 		end,
 	}) -- enable LSP
 
-	use({
-		"ray-x/lsp_signature.nvim",
-		after = "nvim-lspconfig",
-		config = function()
-			require("user.lua-signature")
-		end,
-	}) -- function signature
+	-- use({
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	after = "nvim-lspconfig",
+	-- 	config = function()
+	-- 		require("user.lua-signature")
+	-- 	end,
+	-- }) -- function signature
 
 	use({
 		"williamboman/nvim-lsp-installer", -- simple to use language server installer
@@ -265,6 +267,16 @@ return packer.startup(function(use)
 		end,
 		config = function()
 			require("user.gitsigns")
+		end,
+	})
+	use({
+		"akinsho/git-conflict.nvim",
+		opt = true,
+		setup = function()
+			packer_lazy_load("git-conflict.nvim")
+		end,
+		config = function()
+			require("user.git-conflict")
 		end,
 	})
 
