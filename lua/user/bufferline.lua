@@ -3,6 +3,12 @@ if not status_ok then
 	return
 end
 
+vim.cmd([[
+ function! Quit_vim(a,b,c,d)
+     qa
+ endfunction
+]])
+
 bufferline.setup({
 	options = {
 		numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -58,7 +64,7 @@ bufferline.setup({
 		offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
 		show_buffer_icons = true,
 		show_buffer_close_icons = true,
-		show_close_icon = true,
+		show_close_icon = false,
 		show_tab_indicators = true,
 		persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
 		-- can also be a table containing 2 custom separators
@@ -71,6 +77,13 @@ bufferline.setup({
 		--   -- add custom logic
 		--   return buffer_a.modified > buffer_b.modified
 		-- end
+		custom_areas = {
+			right = function()
+				return {
+					{ text = "%@Quit_vim@  %X" },
+				}
+			end,
+		},
 	},
 	highlights = {
 		fill = {
