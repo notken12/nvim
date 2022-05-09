@@ -61,7 +61,7 @@ local function lsp_highlight_document(client)
 end
 
 local function lsp_format_on_save(client)
-	if client.server_capabilities.document_formatting then
+	if client.server_capabilities.documentFormattingProvider then
 		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>

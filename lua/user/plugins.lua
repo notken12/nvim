@@ -1,34 +1,34 @@
 local fn = vim.fn
 
 -- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local install_path_opt = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 and fn.empty(fn.glob(install_path_opt)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
-end
-
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-	return
+	local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+
+	print("Cloning packer..")
+	-- remove the dir before cloning
+	vim.fn.delete(packer_path, "rf")
+	vim.fn.system({
+		"git",
+		"clone",
+		"https://github.com/wbthomason/packer.nvim",
+		"--depth",
+		"20",
+		packer_path,
+	})
+
+	vim.cmd("packadd packer.nvim")
+	present, packer = pcall(require, "packer")
+
+	if present then
+		print("Packer cloned successfully.")
+	else
+		error("Couldn't clone packer !\nPacker path: " .. packer_path .. "\n" .. packer)
+	end
 end
+
+vim.cmd([[packadd packer.nvim]])
 
 function packer_lazy_load(plugin, timer)
 	if plugin then
@@ -68,12 +68,10 @@ return packer.startup(function(use)
 	use({
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		keys = { "gcc", "gc" },
-		-- event = {"BufRead", "BufNewFile"},
 	})
 
 	use({
 		"numToStr/Comment.nvim", -- Easily comment stuff
-		-- keys = {'gcc', 'gc'},
 		after = "nvim-ts-context-commentstring",
 		config = function()
 			require("user.comment")
@@ -115,8 +113,6 @@ return packer.startup(function(use)
 	use({
 		"nvim-lualine/lualine.nvim",
 		opt = true,
-		-- event = "VimEnter",
-		-- after = "nvim-web-devicons",
 		setup = function()
 			packer_lazy_load("lualine.nvim")
 		end,
