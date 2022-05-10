@@ -62,12 +62,11 @@ end
 
 local function lsp_format_on_save(client)
 	if client.server_capabilities.documentFormattingProvider then
-		vim.cmd([[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-            augroup END
-            ]])
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			callback = function()
+				vim.lsp.buf.format()
+			end,
+		})
 	end
 end
 

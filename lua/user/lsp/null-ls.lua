@@ -51,12 +51,11 @@ null_ls.setup({
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client)
 		if client.server_capabilities.documentFormattingProvider then
-			vim.cmd([[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-            augroup END
-            ]])
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				callback = function()
+					vim.lsp.buf.format()
+				end,
+			})
 		end
 	end,
 })

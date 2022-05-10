@@ -79,7 +79,9 @@ return packer.startup(function(use)
 	})
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-	-- use("gruvbox-community/gruvbox")
+	use({ "gruvbox-community/gruvbox", after = "packer.nvim" })
+	use({ "LunarVim/Colorschemes", after = "packer.nvim" })
+	-- use({ "RRethy/nvim-base16", after = "packer.nvim" })
 	use({
 		"Mofiqul/vscode.nvim",
 		after = "packer.nvim",
@@ -87,9 +89,6 @@ return packer.startup(function(use)
 			require("user.colorscheme")
 		end,
 	})
-	-- use 'lunarvim/darkplus.nvim'
-	-- use 'martinsione/darkplus.nvim'
-	-- use '~/dev/vscode.nvim'
 
 	use({ "kyazdani42/nvim-web-devicons", after = "vscode.nvim" })
 	use({

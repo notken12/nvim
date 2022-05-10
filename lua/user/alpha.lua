@@ -3,6 +3,8 @@ if not status_ok then
 	return
 end
 
+local utils = require("utils")
+
 local dashboard = require("alpha.themes.dashboard")
 -- dashboard.section.header.val = {
 -- 	[[                                  _           ]],
@@ -34,15 +36,26 @@ dashboard.section.buttons.val = {
 	dashboard.button("q", "  Quit Mogovim", ":qa<CR>"),
 }
 
+-- local function footer()
+-- 	-- NOTE: requires the fortune-mod package to work
+-- 	-- local handle = io.popen("fortune")
+-- 	-- local fortune = handle:read("*a")
+-- 	-- handle:close()
+-- 	-- return fortune
+-- 	local names = { "mogo", "mog", "soug", "mango" }
+--  math.randomseed(os.time())
+-- 	return "⚡ greetings " .. names[math.random(#names)]
+-- 	-- return "⚡ mogo ⚡ "
+-- end
+
 local function footer()
-	-- NOTE: requires the fortune-mod package to work
-	-- local handle = io.popen("fortune")
-	-- local fortune = handle:read("*a")
-	-- handle:close()
-	-- return fortune
-	local names = { "mogo", "mog", "soug", "mango" }
-	return "⚡ greetings " .. names[math.random(#names)] .. "  "
-	-- return "⚡ mogo ⚡ "
+	local file = vim.fn.stdpath("config") .. "/mogo.txt"
+	local lines = utils.lines_from(file)
+
+	math.randomseed(os.time())
+
+	local i = math.random(#lines)
+	return " " .. lines[i]
 end
 
 dashboard.section.footer.val = footer()
