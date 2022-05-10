@@ -85,8 +85,8 @@ keymap("n", "<C-\\>", ":ToggleTerm<CR>", opts)
 
 -- vim.cmd("imap <C-BS> <C-W>")
 
-vim.cmd("noremap! <C-BS> <C-w>")
-vim.cmd("noremap! <C-h> <C-w>")
+-- vim.cmd("noremap! <C-BS> <C-w>")
+-- vim.cmd("noremap! <C-h> <C-w>")
 
 vim.api.nvim_set_keymap("x", "iu", ':lua require"treesitter-unit".select()<CR>', { noremap = true })
 vim.api.nvim_set_keymap("x", "au", ':lua require"treesitter-unit".select(true)<CR>', { noremap = true })
