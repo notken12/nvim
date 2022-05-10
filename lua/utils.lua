@@ -38,4 +38,9 @@ M.append_file = function(filename, contents)
   fh:close()
 end
 
+-- M.append_line = function(filename, contents)
+--   local fh = assert(io.open(filename, "a+"))
+--   fh:write(contents)
+--   fh:close()
+
 return M
