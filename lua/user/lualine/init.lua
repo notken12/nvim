@@ -32,11 +32,12 @@ local diff = {
 
 local mode_icons = {
 	insert = "+",
-	normal = "",
+	normal = "λ",
 	command = "⌘",
 	terminal = "",
 	visual = "",
 	replace = "",
+	["v-line"] = "",
 }
 
 local mode = {
@@ -117,11 +118,19 @@ local progress = function()
 end
 
 local spaces = function()
-	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+	return " spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
 local function window()
 	return " " .. vim.api.nvim_win_get_number(0)
+end
+
+local function lsp_client_names()
+	local client_names = {}
+	for _, client in ipairs(vim.lsp.get_active_clients()) do
+		table.insert(client_names, " " .. client.name)
+	end
+	return table.concat(client_names, "  ")
 end
 
 lualine.setup({
@@ -137,9 +146,9 @@ lualine.setup({
 		always_divide_middle = true,
 	},
 	sections = {
-		lualine_a = { mode, branch, filename },
-		lualine_b = { diagnostics },
-		lualine_c = { lsp_progress },
+		lualine_a = { mode, filename },
+		lualine_b = { branch, diagnostics },
+		lualine_c = { lsp_client_names, lsp_progress },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		-- lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_x = { diff },
