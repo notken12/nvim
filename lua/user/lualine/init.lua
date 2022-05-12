@@ -3,8 +3,8 @@ if not status_ok then
 	return
 end
 
-local status_ok, nvim_web_devicons = pcall(require, "nvim-web-devicons")
-if not status_ok then
+local status_ok_icons, nvim_web_devicons = pcall(require, "nvim-web-devicons")
+if not status_ok_icons then
 	return
 end
 
@@ -28,13 +28,22 @@ local diff = {
 	"diff",
 	colored = false,
 	symbols = { added = "+ ", modified = " ", removed = "- " }, -- changes diff symbols
-	cond = hide_in_width,
+}
+
+local mode_icons = {
+	insert = "+",
+	normal = "",
+	command = "⌘",
+	terminal = "",
+	visual = "",
+	replace = "",
 }
 
 local mode = {
 	"mode",
 	fmt = function(str)
-		return str
+		local icon = mode_icons[str:lower()] or ""
+		return icon .. " " .. str
 	end,
 }
 
@@ -111,6 +120,10 @@ local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+local function window()
+	return " " .. vim.api.nvim_win_get_number(0)
+end
+
 lualine.setup({
 	options = {
 		icons_enabled = true,
@@ -124,9 +137,9 @@ lualine.setup({
 		always_divide_middle = true,
 	},
 	sections = {
-		lualine_a = { branch, filename },
+		lualine_a = { mode, branch, filename },
 		lualine_b = { diagnostics },
-		lualine_c = { mode, lsp_progress },
+		lualine_c = { lsp_progress },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		-- lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_x = { diff },
