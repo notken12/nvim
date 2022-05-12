@@ -3,22 +3,16 @@ if not status_ok then
 	return
 end
 
+local status_ok, nvim_web_devicons = pcall(require, "nvim-web-devicons")
+if not status_ok then
+	return
+end
+
+local vscode_theme = require("user.lualine.vscode-theme")
+
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
 end
-
--- Color for highlights
-local colors = {
-	yellow = "#ECBE7B",
-	cyan = "#008080",
-	darkblue = "#081633",
-	green = "#98be65",
-	orange = "#FF8800",
-	violet = "#a9a1e1",
-	magenta = "#c678dd",
-	blue = "#51afef",
-	red = "#ec5f67",
-}
 
 local diagnostics = {
 	"diagnostics",
@@ -32,7 +26,7 @@ local diagnostics = {
 
 local diff = {
 	"diff",
-	colored = true,
+	colored = false,
 	symbols = { added = "+ ", modified = " ", removed = "- " }, -- changes diff symbols
 	cond = hide_in_width,
 }
@@ -48,26 +42,36 @@ local filetype = {
 	"filetype",
 	icons_enabled = true,
 	icon = nil,
+	colored = false,
 }
 
 local filename = {
 	"filename",
+	file_status = false,
+	padding = { left = 1, right = 1 },
+	fmt = function(str)
+		local extension = vim.bo.filetype
+		local icon = nvim_web_devicons.get_icon(str, extension, { default = true })
+		return icon .. " " .. str
+	end,
 }
 
 local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = "",
+	-- fmt = function(str)
+	-- 	return str .. " "
+	-- end,
 }
 
 local location = {
 	"location",
-	padding = 0,
+	padding = { left = 0, right = 1 },
 }
 
 local lsp_progress = {
 	"lsp_progress",
-	display_components = { "lsp_client_name", { "title", "percentage", "message" } },
 	-- With spinner
 	-- display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
 	-- colors = {
@@ -81,10 +85,9 @@ local lsp_progress = {
 	separators = {
 		component = " ",
 		progress = " | ",
-		message = { pre = "(", post = ")" },
 		percentage = { pre = "", post = "%% " },
 		title = { pre = "", post = ": " },
-		lsp_client_name = { pre = "[", post = "]" },
+		lsp_client_name = { pre = "", post = "" },
 		spinner = { pre = "", post = "" },
 		message = { commenced = "In Progress", completed = "Completed" },
 	},
@@ -111,11 +114,12 @@ end
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
-		-- component_separators = { left = "", right = "" },
-		-- section_separators = { left = "", right = "" },
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
+		-- theme = "auto",
+		theme = vscode_theme,
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
+		-- component_separators = { left = "", right = "" },
+		-- section_separators = { left = "", right = "" },
 		-- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
 	},
