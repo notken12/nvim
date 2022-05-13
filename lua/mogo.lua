@@ -8,11 +8,7 @@ end
 
 M.add_tip = function(tip)
 	local file = M.get_filename()
-	utils.append_file(file, M.trim(tip) .. "\n")
-end
-
-M.trim = function(s)
-	return (s:gsub("^%s*(.-)%s*$", "%1"))
+	utils.append_file(file, utils.trim(tip) .. "\n")
 end
 
 M.get_random_tip = function()

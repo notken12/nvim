@@ -1,4 +1,5 @@
 local status_ok, lualine = pcall(require, "lualine")
+local utils = require("utils")
 if not status_ok then
 	return
 end
@@ -32,9 +33,9 @@ local diff = {
 
 local mode_icons = {
 	insert = "+",
-	normal = "λ",
+	normal = "",
 	command = "⌘",
-	terminal = "",
+	terminal = "",
 	visual = "",
 	replace = "",
 	["v-line"] = "",
@@ -44,7 +45,7 @@ local mode = {
 	"mode",
 	fmt = function(str)
 		local icon = mode_icons[str:lower()] or ""
-		return icon .. " " .. str
+		return icon .. " " .. str:sub(1, 1)
 	end,
 }
 
@@ -60,24 +61,42 @@ local filename = {
 	file_status = false,
 	padding = { left = 1, right = 1 },
 	fmt = function(str)
-		local extension = vim.bo.filetype
-		local icon = nvim_web_devicons.get_icon(str, extension, { default = true })
+		if str == "" then
+			return nil
+		end
+		local ft = vim.bo.filetype
+		local icon = nvim_web_devicons.get_icon_by_filetype(ft) or ""
 		return icon .. " " .. str
 	end,
+	symbols = {
+		unnamed = "",
+	},
 }
+local function git_user_name()
+	local handle = io.popen("git config -l | rg user.name")
+	if handle == nil then
+		return nil
+	end
+	local result = handle:read("*a")
+	handle:close()
+	return "   " .. result:sub(11, #result - 1)
+end
 
 local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = "",
-	-- fmt = function(str)
-	-- 	return str .. " "
-	-- end,
+	fmt = function(str)
+		local result = str
+		if result ~= "" then
+			result = result .. (git_user_name() or "")
+		end
+		return result
+	end,
 }
 
 local location = {
 	"location",
-	padding = { left = 0, right = 1 },
 }
 
 local lsp_progress = {
@@ -113,8 +132,8 @@ local progress = function()
 	local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
 	local line_ratio = current_line / total_lines
 	local index = math.ceil(line_ratio * #chars)
-	-- return chars[index]
-	return math.floor(line_ratio * 100 + 0.5) .. "%%"
+	return chars[index]
+	-- return math.floor(line_ratio * 100 + 0.5) .. "%%"
 end
 
 local spaces = function()
@@ -128,7 +147,7 @@ end
 local function lsp_client_names()
 	local client_names = {}
 	for _, client in ipairs(vim.lsp.buf_get_clients()) do
-		table.insert(client_names, " " .. client.name)
+		table.insert(client_names, " " .. client.name)
 	end
 	return table.concat(client_names, "  ")
 end
@@ -144,15 +163,16 @@ lualine.setup({
 		-- section_separators = { left = "", right = "" },
 		-- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		always_divide_middle = true,
+		globalstatus = true,
 	},
 	sections = {
 		lualine_a = { mode, filename },
-		lualine_b = { branch, diagnostics },
+		lualine_b = { branch },
 		lualine_c = { lsp_client_names, lsp_progress },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		-- lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_x = { diff },
-		lualine_y = { filetype },
+		lualine_y = { filetype, diagnostics },
 		lualine_z = { location },
 	},
 	inactive_sections = {

@@ -33,7 +33,6 @@ local options = {
 	scrolloff = 8, -- is one of my fav
 	sidescrolloff = 8,
 	guifont = "SFMono Nerd Font:h14", -- the font used in graphical neovim applications
-	laststatus = 3, -- enable global statusline
 	incsearch = true,
 }
 
