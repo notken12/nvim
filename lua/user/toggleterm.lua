@@ -3,6 +3,8 @@ if not status_ok then
 	return
 end
 
+local M = {}
+
 toggleterm.setup({
 	size = 20,
 	open_mapping = [[<c-\>]],
@@ -41,30 +43,32 @@ vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
-function _LAZYGIT_TOGGLE()
+M.lazygit_toggle = function()
 	lazygit:toggle()
 end
 
 local node = Terminal:new({ cmd = "node", hidden = true })
 
-function _NODE_TOGGLE()
+M.node_toggle = function()
 	node:toggle()
 end
 
 local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
 
-function _NCDU_TOGGLE()
+M.ncdu_toggle = function()
 	ncdu:toggle()
 end
 
 local htop = Terminal:new({ cmd = "htop", hidden = true })
 
-function _HTOP_TOGGLE()
+M.htop_toggle = function()
 	htop:toggle()
 end
 
 local python = Terminal:new({ cmd = "python", hidden = true })
 
-function _PYTHON_TOGGLE()
+M.python_toggle = function()
 	python:toggle()
 end
+
+return M

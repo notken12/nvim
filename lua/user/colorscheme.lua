@@ -13,11 +13,9 @@ vim.opt.background = "dark"
 vim.cmd([[colorscheme vscode]])
 
 vim.g.gruvbox_contrast_dark = "medium"
--- vim.cmd([[set bg=dark]])
+vim.opt.background = "dark"
 -- vim.cmd([[colorscheme gruvbox]])
 --
 -- -- If you want transparent background uncomment:
 -- vim.g.gruvbox_transparent_bg = 1
 -- vim.cmd([[autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE]])
-
--- vim.cmd([[colorscheme darkplus]])

@@ -81,10 +81,8 @@ return packer.startup({
 			end,
 		})
 		-- Colorschemes
-		-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-		use({ "gruvbox-community/gruvbox", after = "packer.nvim" })
+		use({ "lifepillar/gruvbox8", after = "packer.nvim" })
 		use({ "LunarVim/Colorschemes", after = "packer.nvim" })
-		-- use({ "RRethy/nvim-base16", after = "packer.nvim" })
 		use({
 			"Mofiqul/vscode.nvim",
 			after = "packer.nvim",
