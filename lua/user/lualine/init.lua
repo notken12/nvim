@@ -152,35 +152,64 @@ local function lsp_client_names()
 	return table.concat(client_names, "  ")
 end
 
-lualine.setup({
-	options = {
-		icons_enabled = true,
-		-- theme = "auto",
-		theme = vscode_theme,
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
-		-- component_separators = { left = "", right = "" },
-		-- section_separators = { left = "", right = "" },
-		-- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
-		always_divide_middle = true,
-		globalstatus = true,
-	},
-	sections = {
-		lualine_a = { mode, filename },
-		lualine_b = { branch, diagnostics },
-		lualine_c = { lsp_progress },
-		lualine_x = { diff, lsp_client_names },
-		lualine_y = { filetype },
-		lualine_z = { location },
-	},
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
-		lualine_y = {},
-		lualine_z = {},
-	},
-	tabline = {},
-	extensions = {},
-})
+local function theme()
+	if vim.g.colors_name == "vscode" then
+		return vscode_theme
+	end
+	return "auto"
+end
+
+local function component_separators()
+	if vim.g.colors_name == "vscode" then
+		return { left = "", right = "" }
+	end
+	return { left = "", right = "" }
+end
+
+local function section_separators()
+	if vim.g.colors_name == "vscode" then
+		return { left = "", right = "" }
+	end
+	return { left = "", right = "" }
+end
+
+local M = {}
+
+M.setup = function()
+	lualine.setup({
+		options = {
+			icons_enabled = true,
+			-- theme = "auto",
+			theme = theme(),
+			component_separators = component_separators(),
+			section_separators = section_separators(),
+			-- component_separators = { left = "", right = "" },
+			-- section_separators = { left = "", right = "" },
+			-- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+			always_divide_middle = true,
+			globalstatus = true,
+		},
+		sections = {
+			lualine_a = { mode, filename },
+			lualine_b = { branch, diagnostics },
+			lualine_c = { lsp_progress },
+			lualine_x = { diff, lsp_client_names },
+			lualine_y = { filetype },
+			lualine_z = { location },
+		},
+		inactive_sections = {
+			lualine_a = {},
+			lualine_b = {},
+			lualine_c = { "filename" },
+			lualine_x = { "location" },
+			lualine_y = {},
+			lualine_z = {},
+		},
+		tabline = {},
+		extensions = {},
+	})
+end
+
+M.setup()
+
+return M

@@ -30,4 +30,6 @@ vim.cmd([[
   augroup end
 
   autocmd VimEnter * :lua require('user.keymaps')
+
+  autocmd ColorScheme * :lua require('user.lualine').setup()
 ]])
