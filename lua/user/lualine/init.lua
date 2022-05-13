@@ -33,7 +33,7 @@ local diff = {
 
 local mode_icons = {
 	insert = "+",
-	normal = "",
+	normal = "",
 	command = "⌘",
 	terminal = "",
 	visual = "",
