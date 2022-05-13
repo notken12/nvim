@@ -9,7 +9,7 @@ vim.g.vscode_style = "dark"
 vim.g.vscode_italic_comment = 1
 -- Disable nvim-tree background color
 vim.g.vscode_disable_nvimtree_bg = true
-vim.cmd([[set bg=dark]])
+vim.opt.background = "dark"
 vim.cmd([[colorscheme vscode]])
 
 vim.g.gruvbox_contrast_dark = "medium"

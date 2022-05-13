@@ -72,22 +72,6 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- ToggleTerm --
 keymap("n", "<C-\\>", ":ToggleTerm<CR>", opts)
 
--- Terminal --
--- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
--- vim.api.nvim_set_keymap('i', '<C-BS>', '<Esc>caw', {noremap = true})
-
--- vim.cmd("inoremap <C-w> <C-\\><C-o>dB")
--- vim.cmd("inoremap <C-BS> <C-\\><C-o>db")
-
--- vim.cmd("imap <C-BS> <C-W>")
-
--- vim.cmd("noremap! <C-BS> <C-w>")
--- vim.cmd("noremap! <C-h> <C-w>")
-
 vim.api.nvim_set_keymap("x", "iu", ':lua require"treesitter-unit".select()<CR>', { noremap = true })
 vim.api.nvim_set_keymap("x", "au", ':lua require"treesitter-unit".select(true)<CR>', { noremap = true })
 vim.api.nvim_set_keymap("o", "iu", ':<c-u>lua require"treesitter-unit".select()<CR>', { noremap = true })

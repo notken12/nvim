@@ -167,12 +167,10 @@ lualine.setup({
 	},
 	sections = {
 		lualine_a = { mode, filename },
-		lualine_b = { branch },
-		lualine_c = { lsp_client_names, lsp_progress },
-		-- lualine_x = { "encoding", "fileformat", "filetype" },
-		-- lualine_x = { diff, spaces, "encoding", filetype },
-		lualine_x = { diff },
-		lualine_y = { filetype, diagnostics },
+		lualine_b = { branch, diagnostics },
+		lualine_c = { lsp_progress },
+		lualine_x = { diff, lsp_client_names },
+		lualine_y = { filetype },
 		lualine_z = { location },
 	},
 	inactive_sections = {
