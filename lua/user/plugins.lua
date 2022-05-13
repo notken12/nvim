@@ -43,7 +43,7 @@ end
 -- Have packer use a popup window
 packer.init({
 	profile = {
-		enable = true,
+		enable = false,
 		threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
 	},
 	display = {
@@ -164,7 +164,6 @@ return packer.startup({
 				require("user.whichkey")
 			end,
 		})
-		-- use "christoomey/vim-tmux-navigator"
 
 		-- cmp plugins
 		use({
