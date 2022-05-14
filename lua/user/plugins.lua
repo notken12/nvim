@@ -51,6 +51,7 @@ packer.init({
 			return require("packer.util").float({ border = "rounded" })
 		end,
 	},
+	compile_on_sync = true,
 })
 
 -- Install your plugins here
@@ -63,7 +64,7 @@ return packer.startup({
 		})
 
 		use("nathom/filetype.nvim")
-		use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
+		-- use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
 		use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 
 		use({ "wbthomason/packer.nvim", event = "VimEnter" }) -- Have packer manage itself
@@ -90,6 +91,10 @@ return packer.startup({
 				require("user.colorscheme")
 			end,
 		})
+		use({
+			"lifepillar/vim-colortemplate",
+			-- after = "packer.nvim",
+		})
 
 		use({ "kyazdani42/nvim-web-devicons", after = "vscode.nvim" })
 		use({
@@ -112,10 +117,10 @@ return packer.startup({
 
 		use({
 			"nvim-lualine/lualine.nvim",
-			opt = true,
-			setup = function()
-				packer_lazy_load("lualine.nvim")
-			end,
+			after = "nvim-web-devicons",
+			-- setup = function()
+			-- 	packer_lazy_load("lualine.nvim")
+			-- end,
 			config = function()
 				require("user.lualine")
 			end,
@@ -196,39 +201,27 @@ return packer.startup({
 		-- LSP
 		use({
 			"neovim/nvim-lspconfig",
+			after = "nvim-lsp-installer",
+			-- module = "lspconfig",
+			config = function()
+				require("user.lsp")
+			end,
+			requires = { "nlsp-settings.nvim", "null-ls.nvim" },
+		}) -- enable LSP
+
+		use({
+			"williamboman/nvim-lsp-installer", -- simple to use language server installer
 			opt = true,
-			-- after="cmp-nvim-lsp",
 			setup = function()
-				packer_lazy_load("nvim-lspconfig")
+				packer_lazy_load("nvim-lsp-installer")
 				-- reload the current file so lsp actually starts for it
 				vim.defer_fn(function()
 					vim.cmd('if &ft == "packer" | echo "" | else | silent! e %')
 				end, 0)
 			end,
-			config = function()
-				require("user.lsp")
-			end,
-		}) -- enable LSP
-
-		-- use({
-		-- 	"ray-x/lsp_signature.nvim",
-		-- 	after = "nvim-lspconfig",
-		-- 	config = function()
-		-- 		require("user.lua-signature")
-		-- 	end,
-		-- }) -- function signature
-
-		use({
-			"williamboman/nvim-lsp-installer", -- simple to use language server installer
-			-- commit ="e65e4966e1b3db486ae548a5674f20a8416a42d0",
-			after = "nvim-cmp",
-			config = function()
-				require("user.lsp.lsp-installer")
-			end,
-			requires = "null-ls.nvim",
 		})
-		use({ "tamago324/nlsp-settings.nvim", after = "nvim-cmp" }) -- language server settings defined in json for
-		use({ "jose-elias-alvarez/null-ls.nvim", after = "packer.nvim" }) -- for formatters and linters
+		use({ "tamago324/nlsp-settings.nvim", after = "nvim-lsp-installer" }) -- language server settings defined in json for
+		use({ "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer" }) -- for formatters and linters
 
 		-- Telescope
 		use({
@@ -277,7 +270,7 @@ return packer.startup({
 		})
 
 		-- Rust tools
-		use({ "simrat39/rust-tools.nvim", event = { "BufRead", "BufNewFile" } })
+		use({ "simrat39/rust-tools.nvim", after = "nvim-lsp-installer" })
 
 		-- Debugging
 		use({

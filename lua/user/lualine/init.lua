@@ -152,22 +152,26 @@ local function lsp_client_names()
 	return table.concat(client_names, "  ")
 end
 
+local function should_use_vscode_theme()
+	return vim.g.colors_name == "vscode" or vim.g.colors_name == "mogo"
+end
+
 local function theme()
-	if vim.g.colors_name == "vscode" then
+	if should_use_vscode_theme() then
 		return vscode_theme
 	end
 	return "auto"
 end
 
 local function component_separators()
-	if vim.g.colors_name == "vscode" then
+	if should_use_vscode_theme() then
 		return { left = "", right = "" }
 	end
 	return { left = "", right = "" }
 end
 
 local function section_separators()
-	if vim.g.colors_name == "vscode" then
+	if should_use_vscode_theme() then
 		return { left = "", right = "" }
 	end
 	return { left = "", right = "" }
