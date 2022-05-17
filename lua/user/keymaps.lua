@@ -45,9 +45,6 @@ keymap("n", "<C-p>", ":Telescope find_files <CR>", opts)
 -- Live grep
 -- keymap("n", "<C-g>", ":Telescope live_grep <CR>", opts)
 
--- File explorer
-keymap("n", "<C-e>", ":NvimTreeToggle <CR>", opts)
-
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
