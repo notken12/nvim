@@ -29,7 +29,7 @@ Background: dark
 
 ; Color palette {{{
 ; Color name                GUI                  Base256    Base16
-Color: base00 #1f1f1f ~ Black # Default Background
+Color: base00 #202020 ~ Black # Default Background
 Color: base01 #252525 ~ Black # Lighter Background (Used for status bars, line number and folding marks)
 Color: base02 #35557a ~ DarkCyan # Selection Background
 Color: base03 #858585 ~ Gray # Comments, Invisibles, Line Highlighting
@@ -37,14 +37,14 @@ Color: base04 #cac7bd ~ White # Dark Foreground (Used for status bars)
 Color: base05 #faf1d4 ~ White # Default Foreground, Caret, Delimiters, Operators
 Color: base06 #faf1d4 ~ White # Light Foreground (Not often used)
 Color: base07 #faf1d4 ~ White # Light Background (Not often used)
-Color: base08 #f8ea89 ~ Yellow # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-Color: base09 #6fabf0 ~ Blue # Integers, Boolean, Constants, XML Attributes, Markup Link Url
-Color: base0A #aacfff ~ LightBlue # Classes, Markup Bold, Search Text Background
-Color: base0B #bede48 ~ LightGreen # Strings, Inherited Class, Markup Code, Diff Inserted
-Color: base0C #8aca8a ~ Green # Support, Regular Expressions, Escape Characters, Markup Quotes
-Color: base0D #fa755f ~ Red # Functions, Methods, Attribute IDs, Headings
-Color: base0E #ffc145 ~ DarkRed # Keywords, Storage, Selector, Markup Italic, Diff Changed
-Color: base0F #ab7967 ~ Cyan # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+Color: base08 #fabd2f ~ Yellow # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+Color: base09 #d3869b ~ Cyan # Integers, Boolean, Constants, XML Attributes, Markup Link Url
+Color: base0A #8ec07c ~ LightBlue # Classes, Markup Bold, Search Text Background
+Color: base0B #b8bb26 ~ LightGreen # Strings, Inherited Class, Markup Code, Diff Inserted
+Color: base0C #fb4934 ~ Green # Support, Regular Expressions, Escape Characters, Markup Quotes
+Color: base0D #83a9c8 ~ Red # Functions, Methods, Attribute IDs, Headings
+Color: base0E #fe8019 ~ DarkRed # Keywords, Storage, Selector, Markup Italic, Diff Changed
+Color: base0F #d65d0e ~ Brown # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 
 Term Colors: base00 base0D base0D base0E base09 base0C base0E base03
 Term Colors: base01 base0D base09 base08
@@ -76,10 +76,10 @@ Cursor               none       base05
 CursorColumn         none              base01
 CursorLine           none              base01
 DiffAdd                base00 base0B   reverse     
-DiffChange                      base00 base09      reverse
+DiffChange                      base00 base0A      reverse
 DiffDelete                          base00  base0D reverse
 Directory            base09       none
-EndOfBuffer          base01       none
+EndOfBuffer          base00       base00
 ErrorMsg             base0D               base05       reverse
 Folded               base03             base01       italic
 IncSearch            base02           base05       t=reverse g=standout
@@ -95,10 +95,10 @@ Question             base03             none
 Search               base02            base05       reverse
 SignColumn           base03             none
 SpecialKey           base03             none
-; SpellBad             base0D     none              s=base0C t=underline g=undercurl
-; SpellCap             base0D     none              s=base0C t=underline g=undercurl
-; SpellLocal           base0D     none              s=base0C t=underline g=undercurl
-; SpellRare            base0D     none              s=base0C t=underline g=undercurl
+SpellBad             base0D     none              s=base0C t=underline g=undercurl
+SpellCap             base0D     none              s=base0C t=underline g=undercurl
+SpellLocal           base0D     none              s=base0C t=underline g=undercurl
+SpellRare            base0D     none              s=base0C t=underline g=undercurl
 StatusLine           base01              base05       reverse
 StatusLineNC         none              base05             reverse
 TabLine              base03             base01
@@ -106,37 +106,38 @@ TabLineFill          base05       base00
 TabLineSel           base05       base00
 Title                base05            none              bold
 VertSplit            base01       none
-Visual               base02              base05       reverse
-VisualNOS            base05       base02
+Visual               none              base02       
+VisualNOS            none       base02 
 WarningMsg           base0D               none
-; WildMenu             base05       base0C
+WildMenu             base05       base0C
 ; Other conventional group names (see `:help group-name`)
 Boolean              base09       none
-; Character            base0C            none
+Character            base0C            none
 Comment              base03             none              italic
 Constant             base09            none
-; Debug                base0C           none
+Debug                base0C           none
 Delimiter            base05       none
 Error                base0D               base05       reverse
 Float                base09       none
 Function             base0D             none
-Identifier           base08        none
+Identifier           base0E        none
 Ignore               base05       none
 Include              base0D               none
 Keyword              base0E              none
 Label                base0D             none
 Number               base09       none
 Operator             base05        none
-; PreProc              base0C           none
-; Special              base0C           none
-; SpecialChar          base0C           none
+PreProc              base0C           none
+Special              base0C           none
+SpecialChar          base0C           none
 SpecialComment       base0D               none
 Statement            base0E              none
 StorageClass         base0E        none
 String               base0B       none
 Structure            base0D               none
-; Todo                 base0C           none              bold
+Todo                 base0C           none              bold
 Type                 base0A     none
+TSConstructor base0A none
 Underlined           none              none              underline
 CursorIM             none              base05
 ; Symbol base08 none
@@ -147,12 +148,12 @@ ToolbarButton        base0E              base01       bold
 ; }}}
 
 ; Additional highlight groups {{{
-NormalMode           base03             base05       reverse
-InsertMode           base09       base00             reverse
+NormalMode           base08             base05       reverse
+InsertMode           base0B       base00             reverse
 ReplaceMode          base0D            base00             reverse
-VisualMode           base02              base05       reverse
+VisualMode           base05              base0E       
 CommandMode          base0C           base05       reverse
-IndentBlanklineChar base03 none
+IndentBlanklineChar base03 none nocombine
 ; }}}
 
 ; NeoVim {{{

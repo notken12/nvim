@@ -153,7 +153,7 @@ local function lsp_client_names()
 end
 
 local function should_use_vscode_theme()
-	return vim.g.colors_name == "vscode" -- or vim.g.colors_name == "mogo"
+	return vim.g.colors_name == "vscode" or vim.g.colors_name == "mogo"
 end
 
 local function theme()
