@@ -85,9 +85,7 @@ return packer.startup({
 		use({
 			"Mofiqul/vscode.nvim",
 			after = "packer.nvim",
-			config = function()
-				require("user.colorscheme")
-			end,
+			config = [[require("user.colorscheme")]],
 		})
 		use({
 			"lifepillar/vim-colortemplate",
@@ -99,17 +97,13 @@ return packer.startup({
 			"kyazdani42/nvim-tree.lua",
 			cmd = { "NvimTreeToggle", "NvimTreeFocus" },
 
-			config = function()
-				require("user.nvim-tree")
-			end,
+			config = [[require("user.nvim-tree")]],
 		})
 
 		use({
 			"akinsho/bufferline.nvim",
 			after = "nvim-web-devicons",
-			config = function()
-				require("user.bufferline")
-			end,
+			config = [[require("user.bufferline")]],
 		})
 		use({ "moll/vim-bbye", cmd = { "Bdelete", "Bwipeout" } })
 
@@ -119,68 +113,50 @@ return packer.startup({
 			-- setup = function()
 			-- 	packer_lazy_load("lualine.nvim")
 			-- end,
-			config = function()
-				require("user.lualine")
-			end,
+			config = [[require("user.lualine")]],
 		})
 		use({ "arkav/lualine-lsp-progress", after = "lualine.nvim" })
 
 		use({
 			"akinsho/toggleterm.nvim",
 			cmd = "ToggleTerm",
-			config = function()
-				require("user.toggleterm")
-			end,
+			config = [[require("user.toggleterm")]],
 		})
 
 		use({
 			"ahmedkhalf/project.nvim",
 			after = "telescope.nvim",
-			config = function()
-				require("user.project")
-			end,
+			config = [[require("user.project")]],
 		})
 
 		use({
 			"lukas-reineke/indent-blankline.nvim",
 			event = "BufRead",
-			config = function()
-				require("user.indentline")
-			end,
+			config = [[require("user.indentline")]],
 		})
 		use({
 			"goolord/alpha-nvim",
 			-- after = "packer.nvim",
-			config = function()
-				require("user.alpha")
-			end,
+			config = [[require("user.alpha")]],
 		})
 		use({ "antoinemadec/FixCursorHold.nvim", after = "packer.nvim" }) -- This is needed to fix lsp doc highlight
 		use({
 			"folke/which-key.nvim",
 			after = "nvim-web-devicons",
-			setup = function()
-				packer_lazy_load("which-key.nvim")
-			end,
-			config = function()
-				require("user.whichkey")
-			end,
+			setup = [[packer_lazy_load("which-key.nvim")]],
+			config = [[require("user.whichkey")]],
 		})
 
 		-- cmp plugins
 		use({
 			"hrsh7th/nvim-cmp",
 			after = "friendly-snippets",
-			config = function()
-				require("user.cmp")
-			end,
+			config = [[require("user.cmp")]],
 		}) -- The completion plugin
 		use({
 			"windwp/nvim-autopairs",
 			after = "nvim-cmp",
-			config = function()
-				require("user.autopairs")
-			end,
+			config = [[require("user.autopairs")]],
 		}) -- Autopairs, integrates with both cmp and treesitter
 		use({ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" }) -- snippet completions
 		use({ "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" })
@@ -202,9 +178,7 @@ return packer.startup({
 			"neovim/nvim-lspconfig",
 			after = "nvim-lsp-installer",
 			-- module = "lspconfig",
-			config = function()
-				require("user.lsp")
-			end,
+			config = [[require("user.lsp")]],
 			requires = { "nlsp-settings.nvim", "null-ls.nvim" },
 		}) -- enable LSP
 
@@ -226,9 +200,7 @@ return packer.startup({
 		use({
 			"nvim-telescope/telescope.nvim",
 			cmd = "Telescope",
-			config = function()
-				require("user.telescope")
-			end,
+			config = [[require("user.telescope")]],
 		})
 
 		-- Treesitter
@@ -239,9 +211,7 @@ return packer.startup({
 			setup = function()
 				packer_lazy_load("nvim-treesitter")
 			end,
-			config = function()
-				require("user.treesitter")
-			end,
+			config = [[require("user.treesitter")]],
 		})
 		use({
 			"David-Kunz/treesitter-unit",
@@ -268,9 +238,7 @@ return packer.startup({
 			setup = function()
 				packer_lazy_load("gitsigns.nvim")
 			end,
-			config = function()
-				require("user.gitsigns")
-			end,
+			config = [[require("user.gitsigns")]],
 		})
 		use({
 			"akinsho/git-conflict.nvim",
@@ -278,9 +246,7 @@ return packer.startup({
 			setup = function()
 				packer_lazy_load("git-conflict.nvim")
 			end,
-			config = function()
-				require("user.git-conflict")
-			end,
+			config = [[require("user.git-conflict")]],
 		})
 
 		-- Rust tools
@@ -290,23 +256,17 @@ return packer.startup({
 		use({
 			"mfussenegger/nvim-dap",
 			module = "dap",
-			config = function()
-				require("user.nvim-dap")
-			end,
+			config = [[require("user.nvim-dap")]],
 		})
 		use({
 			"theHamsta/nvim-dap-virtual-text",
 			after = "nvim-dap",
-			config = function()
-				require("user.nvim-dap-virtual-text")
-			end,
+			config = [[require("user.nvim-dap-virtual-text")]],
 		})
 		use({
 			"nvim-telescope/telescope-dap.nvim",
 			after = { "nvim-dap" },
-			config = function()
-				require("user.telescope-dap")
-			end,
+			config = [[require("user.telescope-dap")]],
 		})
 		use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, after = "nvim-dap" })
 
