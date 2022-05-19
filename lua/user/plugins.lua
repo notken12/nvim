@@ -202,6 +202,16 @@ return packer.startup({
 			cmd = "Telescope",
 			config = [[require("user.telescope")]],
 		})
+		use({
+			"nvim-telescope/telescope-dap.nvim",
+			after = { "nvim-dap" },
+			config = [[require("user.telescope-dap")]],
+		})
+		use({
+			"nvim-telescope/telescope-ui-select.nvim",
+			after = "telescope.nvim",
+			config = [[require("user.telescope-ui-select"]],
+		})
 
 		-- Treesitter
 		use({
@@ -220,7 +230,7 @@ return packer.startup({
 
 		-- Colorizer
 		use({
-			"NvChad/nvim-colorizer.lua",
+			"norcalli/nvim-colorizer.lua",
 			event = "BufRead",
 			config = [[require("user.colorizer")]],
 		})
@@ -257,11 +267,6 @@ return packer.startup({
 			"theHamsta/nvim-dap-virtual-text",
 			after = "nvim-dap",
 			config = [[require("user.nvim-dap-virtual-text")]],
-		})
-		use({
-			"nvim-telescope/telescope-dap.nvim",
-			after = { "nvim-dap" },
-			config = [[require("user.telescope-dap")]],
 		})
 		use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, after = "nvim-dap" })
 
