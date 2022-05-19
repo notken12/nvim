@@ -6,6 +6,7 @@ chris@machine's Neovim-from-scratch template + some improvements
 Make Neovim a good dog.
 
 Featuring LSP, code debugging, global statusline, Telescope search, and bug fixes for chris@machine's config.
+Blazing fast startup time, starts in ~ 0.01 to 0.04 seconds.
 
 ![Editing](screenshots/editing.png)
 ![Debugger](screenshots/debugger.png)
@@ -21,7 +22,7 @@ git clone https://github.com/notken12/nvim.git ~/.config/nvim
 
 ### Windows
 
-```bash
+```powershell
 git clone https://github.com/notken12/nvim.git $env:LOCALAPPDATA/nvim
 ```
 
@@ -67,7 +68,9 @@ To add support for a language, run these nvim commands:
 :LspInstall yourlanguagename
 ```
 
-See https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#Javascript for how to add debug adapters for code debugging.
+See https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation for how to add debug adapters for code debugging.
+
+Installed color schemes are vscode, gruvbox, and some others.
 
 ## 💞 Contribution
 
