@@ -105,6 +105,11 @@ return packer.startup({
 			after = "nvim-web-devicons",
 			config = [[require("user.bufferline")]],
 		})
+		-- use({
+		-- 	"rafcamlet/tabline-framework.nvim",
+		-- 	requires = "nvim-web-devicons",
+		-- 	config = [[require("user.tabline")]],
+		-- })
 		use({ "moll/vim-bbye", cmd = { "Bdelete", "Bwipeout" } })
 
 		use({

@@ -80,7 +80,9 @@ bufferline.setup({
 		custom_areas = {
 			right = function()
 				return {
-					{ text = "%@Quit_vim@  %X" },
+					{
+						text = "%@Quit_vim@  %X",
+					},
 				}
 			end,
 		},

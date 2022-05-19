@@ -39,7 +39,6 @@ M.setup = function()
 	rust_tools.setup(opts)
 	-- rust_tools.start_standalone_if_required()
 	-- require("rust-tools.inlay_hints").set_inlay_hints()
-	print("setup rust tools")
 end
 
 return M
