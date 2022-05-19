@@ -30,7 +30,6 @@ for _i, server in pairs(servers) do
 		-- Initialize the LSP via rust-tools instead
 		require("user.rusttools").setup()
 		-- Only if standalone support is needed
-		return
 	end
 
 	lspconfig[server.name].setup(opts)
