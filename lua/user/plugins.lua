@@ -142,7 +142,7 @@ return packer.startup({
 		use({ "antoinemadec/FixCursorHold.nvim", after = "packer.nvim" }) -- This is needed to fix lsp doc highlight
 		use({
 			"folke/which-key.nvim",
-			after = "nvim-web-devicons",
+			opt = true,
 			setup = [[packer_lazy_load("which-key.nvim")]],
 			config = [[require("user.whichkey")]],
 		})
@@ -220,14 +220,9 @@ return packer.startup({
 
 		-- Colorizer
 		use({
-			"norcalli/nvim-colorizer.lua",
-			-- after = "nvim-treesitter",
-			-- opt = true,
-			config = function()
-				require("colorizer").setup({ "*" }, {
-					-- mode = "foreground",
-				})
-			end,
+			"NvChad/nvim-colorizer.lua",
+			event = "BufRead",
+			config = [[require("user.colorizer")]],
 		})
 
 		-- Git
