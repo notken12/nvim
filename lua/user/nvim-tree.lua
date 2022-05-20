@@ -21,6 +21,13 @@ vim.g.nvim_tree_icons = {
 	},
 }
 
+vim.g.nvim_tree_show_icons = {
+	git = 0,
+	folders = 1, -- or 0,
+	files = 1, -- or 0,
+	folder_arrows = 1, -- or 0
+}
+
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
 	return
@@ -53,15 +60,6 @@ nvim_tree.setup({
 	--   enable = true,
 	--   auto_open = true,
 	-- },
-	diagnostics = {
-		enable = true,
-		icons = {
-			hint = "",
-			info = "",
-			warning = "",
-			error = "",
-		},
-	},
 	update_focused_file = {
 		enable = true,
 		update_cwd = true,
@@ -73,11 +71,12 @@ nvim_tree.setup({
 	},
 	filters = {
 		dotfiles = false,
-		custom = {},
+		custom = { ".git" },
+		exclude = { ".gitignore" },
 	},
 	git = {
-		enable = true,
-		ignore = true,
+		enable = false,
+		ignore = false,
 		timeout = 500,
 	},
 	view = {
@@ -99,11 +98,6 @@ nvim_tree.setup({
 	trash = {
 		cmd = "trash",
 		require_confirm = true,
-	},
-	git = {
-		enable = true,
-		ignore = true,
-		timeout = 400,
 	},
 	-- root_folder_modifier = ":t",
 	diagnostics = {
