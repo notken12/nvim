@@ -64,7 +64,7 @@ cmp.setup({
 		}),
 		-- Accept currently selected item. If none selected, `select` first item.
 		-- Set `select` to `false` to only confirm explicitly selected items.
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -96,8 +96,8 @@ cmp.setup({
 	},
 
 	formatting = {
-		-- fields = { "abbr", "kind", "menu" },
-		fields = { "kind", "abbr", "menu" },
+		fields = { "abbr", "kind", "menu" },
+		-- fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
 			-- Kind icons
 			-- vim_item.abbr = ' ' .. vim_item.abbr
@@ -137,7 +137,9 @@ cmp.setup({
 	},
 	experimental = {
 		ghost_text = true,
-		native_menu = false,
+	},
+	view = {
+		-- entries = "native",
 	},
 })
 

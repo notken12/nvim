@@ -25,10 +25,19 @@ local diagnostics = {
 	always_visible = true,
 }
 
+vim.cmd([[
+ function! Show_diff(a,b,c,d)
+     Gitsigns diffthis
+ endfunction
+]])
+
 local diff = {
 	"diff",
 	colored = false,
 	symbols = { added = "+ ", modified = " ", removed = "- " }, -- changes diff symbols
+	fmt = function(str)
+		return "%@Show_diff@" .. str .. "%X"
+	end,
 }
 
 local mode_icons = {
@@ -88,9 +97,9 @@ local branch = {
 	icon = "",
 	fmt = function(str)
 		local result = str
-		if result ~= "" then
-			result = result .. (git_user_name() or "")
-		end
+		-- if result ~= "" then
+		-- 	result = result .. (git_user_name() or "")
+		-- end
 		return result
 	end,
 }
@@ -144,12 +153,20 @@ local function window()
 	return " " .. vim.api.nvim_win_get_number(0)
 end
 
+vim.cmd([[
+ function! Show_lsp_clients(a,b,c,d)
+     LspInfo
+ endfunction
+]])
+
 local function lsp_client_names()
 	local client_names = {}
 	for _, client in ipairs(vim.lsp.buf_get_clients()) do
 		table.insert(client_names, " " .. client.name)
 	end
-	return table.concat(client_names, "  ")
+	local formatted = table.concat(client_names, "  ")
+	local with_click_event = "%@Show_lsp_clients@" .. formatted .. "%X"
+	return with_click_event
 end
 
 local function should_use_vscode_theme()
@@ -189,12 +206,12 @@ M.setup = function()
 			section_separators = section_separators(),
 			-- component_separators = { left = "", right = "" },
 			-- section_separators = { left = "", right = "" },
-			-- disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+			disabled_filetypes = {},
 			always_divide_middle = true,
 			globalstatus = true,
 		},
 		sections = {
-			lualine_a = { mode, filename },
+			lualine_a = { mode },
 			lualine_b = { branch, diagnostics },
 			lualine_c = { lsp_progress },
 			lualine_x = { diff, lsp_client_names },

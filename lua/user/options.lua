@@ -34,6 +34,7 @@ local options = {
 	sidescrolloff = 8,
 	guifont = "SFMono Nerd Font:h12", -- the font used in graphical neovim applications
 	incsearch = true,
+	visualbell = true,
 }
 
 vim.opt.shortmess:append("c")

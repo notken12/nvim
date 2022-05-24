@@ -62,8 +62,8 @@ nvim_tree.setup({
 	-- },
 	update_focused_file = {
 		enable = true,
-		update_cwd = true,
-		ignore_list = {},
+		update_cwd = false,
+		ignore_list = { ".git", "node_modules", ".cache" },
 	},
 	system_open = {
 		cmd = nil,
@@ -72,7 +72,6 @@ nvim_tree.setup({
 	filters = {
 		dotfiles = false,
 		custom = { ".git" },
-		exclude = { ".gitignore" },
 	},
 	git = {
 		enable = false,

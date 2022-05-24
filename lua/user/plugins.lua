@@ -79,6 +79,7 @@ return packer.startup({
 		})
 		-- Colorschemes
 		use({ "lifepillar/gruvbox8", after = "packer.nvim" })
+		use({ "sainnhe/gruvbox-material", after = "packer.nvim" })
 		use({ "LunarVim/Colorschemes", after = "packer.nvim" })
 		use({
 			"Mofiqul/vscode.nvim",
@@ -108,17 +109,24 @@ return packer.startup({
 		-- 	requires = "nvim-web-devicons",
 		-- 	config = [[require("user.tabline")]],
 		-- })
-		use({ "moll/vim-bbye", cmd = { "Bdelete", "Bwipeout" } })
+		use({ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } })
 
 		use({
 			"nvim-lualine/lualine.nvim",
-			after = "nvim-web-devicons",
+			after = "lualine-lsp-progress",
 			-- setup = function()
 			-- 	packer_lazy_load("lualine.nvim")
 			-- end,
 			config = [[require("user.lualine")]],
 		})
-		use({ "arkav/lualine-lsp-progress", after = "lualine.nvim" })
+		use({ "arkav/lualine-lsp-progress", after = "nvim-web-devicons" })
+
+		-- Show outline in winbar
+		use({
+			"SmiteshP/nvim-gps",
+			after = "nvim-treesitter",
+			config = [[require("user.nvim-gps")]],
+		})
 
 		use({
 			"akinsho/toggleterm.nvim",
@@ -198,11 +206,13 @@ return packer.startup({
 		})
 		use({ "tamago324/nlsp-settings.nvim", after = "nvim-lsp-installer" }) -- language server settings defined in json for
 		use({ "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer" }) -- for formatters and linters
+		use({ "kosayoda/nvim-lightbulb", after = "nvim-lspconfig", config = [[require("user.lightbulb")]] })
 
 		-- Telescope
 		use({
 			"nvim-telescope/telescope.nvim",
 			cmd = "Telescope",
+			module = "telescope",
 			config = [[require("user.telescope")]],
 		})
 		use({
@@ -212,8 +222,8 @@ return packer.startup({
 		})
 		use({
 			"nvim-telescope/telescope-ui-select.nvim",
-			after = "telescope.nvim",
-			config = [[require("user.telescope-ui-select"]],
+			-- after = "telescope.nvim",
+			-- config = [[require("user.telescope-ui-select"]],
 		})
 
 		-- Treesitter
@@ -273,10 +283,46 @@ return packer.startup({
 		})
 		use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" }, after = "nvim-dap" })
 
+		-- use({
+		-- 	"folke/twilight.nvim",
+		-- 	config = [[require("user.twilight")]],
+		-- })
+
 		-- Startup time profiling
 		use({
 			"tweekmonster/startuptime.vim",
 			cmd = "StartupTime",
+		})
+
+		use({
+			"ghillb/cybu.nvim",
+			-- branch = "v1.x", -- won't receive breaking changes
+			branch = "main", -- timely updates
+			cmd = { "CybuPrev", "CybuNext" },
+			config = function()
+				local ok, cybu = pcall(require, "cybu")
+				if not ok then
+					return
+				end
+				cybu.setup({
+					style = {
+						border = "rounded",
+						hide_buffer_id = true,
+					},
+					exclude = {
+						"qf",
+						"alpha",
+					},
+				})
+			end,
+		})
+
+		use({
+			"~/dev/mogoplugin",
+			after = "nvim-web-devicons",
+			config = function()
+				require("mogoplugin").setup()
+			end,
 		})
 
 		-- Automatically set up your configuration after cloning packer.nvim
