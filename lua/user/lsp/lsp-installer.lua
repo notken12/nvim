@@ -10,6 +10,22 @@ end
 
 lsp_installer.setup()
 
+local server_opts = {
+	["rust_analyzer"] = {
+		checkOnSave = {
+			allFeatures = true,
+			overrideCommand = {
+				"cargo",
+				"clippy",
+				"--workspace",
+				"--message-format=json",
+				"--all-targets",
+				"--all-features",
+			},
+		},
+	},
+}
+
 local servers = lsp_installer.get_installed_servers()
 for _i, server in pairs(servers) do
 	local opts = {
@@ -32,5 +48,6 @@ for _i, server in pairs(servers) do
 		-- Only if standalone support is needed
 	end
 
-	lspconfig[server.name].setup(opts)
+	local merged_opts = vim.tbl_deep_extend("force", server_opts[server.name] or {}, opts)
+	lspconfig[server.name].setup(merged_opts)
 end

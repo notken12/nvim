@@ -324,6 +324,12 @@ return packer.startup({
 				require("mogoplugin").setup()
 			end,
 		})
+		use({
+			"glacambre/firenvim",
+			run = function()
+				vim.fn["firenvim#install"](0)
+			end,
+		})
 
 		-- Automatically set up your configuration after cloning packer.nvim
 		-- Put this at the end after all plugins
