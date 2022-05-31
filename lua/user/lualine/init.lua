@@ -36,6 +36,9 @@ local diff = {
 	colored = false,
 	symbols = { added = "+ ", modified = " ", removed = "- " }, -- changes diff symbols
 	fmt = function(str)
+		if str == "" then
+			return ""
+		end
 		return "%@Show_diff@" .. str .. "%X"
 	end,
 }
@@ -160,8 +163,12 @@ vim.cmd([[
 ]])
 
 local function lsp_client_names()
+	local clients = vim.lsp.buf_get_clients()
+	if #clients == 0 then
+		return ""
+	end
 	local client_names = {}
-	for _, client in ipairs(vim.lsp.buf_get_clients()) do
+	for _, client in ipairs(clients) do
 		table.insert(client_names, " " .. client.name)
 	end
 	local formatted = table.concat(client_names, "  ")
@@ -193,6 +200,11 @@ local function section_separators()
 	end
 	return { left = "", right = "" }
 end
+
+local fileformat = {
+	"fileformat",
+	padding = { left = 1, right = 1 },
+}
 
 local M = {}
 
