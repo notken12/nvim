@@ -1,34 +1,37 @@
-vim.cmd([[
-  augroup _general_settings
-    autocmd!
-    autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200}) 
-    " autocmd BufWinEnter * :set formatoptions-=cro
-    " autocmd FileType qf set nobuflisted
-  augroup end
+local autocmd = vim.api.nvim_create_autocmd
 
-  " augroup _git
-  "   autocmd!
-  "   autocmd FileType gitcommit setlocal wrap
-  "   autocmd FileType gitcommit setlocal spell
-  " augroup end
-  "
-  " augroup _markdown
-  "   autocmd!
-  "   autocmd FileType markdown setlocal wrap
-  "   autocmd FileType markdown setlocal spell
-  " augroup end
+-- Disable statusline in alpha
+autocmd("FileType", {
+	pattern = "alpha",
+	callback = function()
+		vim.opt.laststatus = 0
+	end,
+})
 
-  augroup _auto_resize
-    autocmd!
-    autocmd VimResized * tabdo wincmd = 
-  augroup end
+autocmd("BufUnload", {
+	buffer = 0,
+	callback = function()
+		vim.opt.laststatus = 3
+	end,
+})
 
-  " augroup _alpha
-  "   autocmd!
-  "   autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-  " augroup end
+autocmd("ColorScheme", {
+	callback = function()
+		require("user.lualine").setup()
+	end,
+})
 
-  autocmd VimEnter * :lua require('user.keymaps')
+-- autocmd("VimEnter", {
+-- 	callback = function()
+-- 		require("user.keymaps")
+-- 	end,
+-- })
 
-  autocmd ColorScheme * :lua require('user.lualine').setup()
-]])
+autocmd("TextYankPost", {
+	callback = function()
+		require("vim.highlight").on_yank({
+			higroup = "visual",
+			timeout = 200,
+		})
+	end,
+})

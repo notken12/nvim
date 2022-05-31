@@ -35,6 +35,7 @@ local options = {
 	guifont = "SFMono Nerd Font:h12", -- the font used in graphical neovim applications
 	incsearch = true,
 	visualbell = true,
+	whichwrap = "<,>,[,],h,l",
 }
 
 vim.opt.shortmess:append("c")
@@ -43,6 +44,6 @@ for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
-vim.cmd("set whichwrap+=<,>,[,],h,l")
+-- vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
 -- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
