@@ -87,11 +87,11 @@ return packer.startup({
 		use({
 			"sainnhe/gruvbox-material",
 			after = "packer.nvim",
+			config = [[require("user.colorscheme")]],
 		})
 		use({
 			"Mofiqul/vscode.nvim",
 			after = "packer.nvim",
-			config = [[require("user.colorscheme")]],
 		})
 		use({
 			"shaunsingh/nord.nvim",
@@ -124,6 +124,7 @@ return packer.startup({
 
 		use({
 			"nvim-lualine/lualine.nvim",
+			-- after = "packer.nvim",
 			after = "lualine-lsp-progress",
 			-- setup = function()
 			-- 	packer_lazy_load("lualine.nvim")

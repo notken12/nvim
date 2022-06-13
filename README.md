@@ -28,6 +28,8 @@ git clone https://github.com/notken12/nvim.git $env:LOCALAPPDATA/nvim
 
 ## 📃 Requirements
 
+Neovim nightly (development version): https://github.com/neovim/neovim/wiki/Installing-Neovim
+
 ### GCC
 
 ```bash

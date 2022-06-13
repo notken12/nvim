@@ -6,10 +6,10 @@ local term_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 -- Disable arrow keys
-keymap("n", "<Up>", "<Nop>", opts)
-keymap("n", "<Down>", "<Nop>", opts)
-keymap("n", "<Left>", "<Nop>", opts)
-keymap("n", "<Right>", "<Nop>", opts)
+-- keymap("n", "<Up>", "<Nop>", opts)
+-- keymap("n", "<Down>", "<Nop>", opts)
+-- keymap("n", "<Left>", "<Nop>", opts)
+-- keymap("n", "<Right>", "<Nop>", opts)
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
