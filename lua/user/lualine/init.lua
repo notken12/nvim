@@ -187,11 +187,17 @@ local function should_use_tokyonight_theme()
   return vim.g.colors_name == "tokyonight"
 end
 
+local function should_use_nord_theme()
+  return vim.g.colors_name == "nord"
+end
+
 local function theme()
   if should_use_vscode_theme() then
     return vscode_theme
   elseif should_use_tokyonight_theme() then
     return "tokyonight"
+  elseif should_use_nord_theme() then
+    return "nord"
   end
   return "auto"
 end
@@ -228,10 +234,10 @@ M.setup = function()
       icons_enabled = true,
       -- theme = "auto",
       theme = theme(),
-      -- component_separators = component_separators(),
-      -- section_separators = section_separators(),
-      component_separators = normal_component_separators,
-      section_separators = normal_section_separators,
+      component_separators = component_separators(),
+      section_separators = section_separators(),
+      -- component_separators = normal_component_separators,
+      -- section_separators = normal_section_separators,
       disabled_filetypes = {},
       always_divide_middle = true,
       globalstatus = true,

@@ -81,19 +81,27 @@ return packer.startup({
       config = [[require("user.comment")]],
     })
     -- Colorschemes
+    -- use({
+    --   "sainnhe/gruvbox-material",
+    -- })
     use({
-      "sainnhe/gruvbox-material",
-      after = "packer.nvim",
+      "rebelot/kanagawa.nvim",
+      config = [[require("user.colorscheme")]],
     })
     use({
       "Mofiqul/vscode.nvim",
-      after = "packer.nvim",
     })
     use({
       "folke/tokyonight.nvim",
-      after = "packer.nvim",
-      config = [[require("user.colorscheme")]],
     })
+    use {
+      "EdenEast/nightfox.nvim",
+      tag = "v1.0.0",
+    } -- Packer
+    use {
+      "shaunsingh/nord.nvim",
+    }
+
     use({
       "rktjmp/lush.nvim",
       cmd = { "Lushify", "LushImport", "LushRunQuickstart", "LushRunTutorial" },
@@ -122,13 +130,13 @@ return packer.startup({
     use({
       "nvim-lualine/lualine.nvim",
       -- after = "packer.nvim",
-      after = "lualine-lsp-progress",
+      --after = "lualine-lsp-progress",
       -- setup = function()
       -- 	packer_lazy_load("lualine.nvim")
       -- end,
       config = [[require("user.lualine")]],
     })
-    use({ "arkav/lualine-lsp-progress", after = "nvim-web-devicons" })
+    use({ "arkav/lualine-lsp-progress" })
 
     -- Show outline in winbar
     use({
@@ -319,15 +327,15 @@ return packer.startup({
       config = [[require("user.cybu")]],
     })
 
-    use({
-      "notken12/gps-bar",
-      after = "nvim-web-devicons",
-      config = function()
-        require("gps-bar").setup({
-          separator = " > ",
-        })
-      end,
-    })
+    -- use({
+    --   "notken12/gps-bar",
+    --   after = "nvim-web-devicons",
+    --   config = function()
+    --     require("gps-bar").setup({
+    --       separator = " > ",
+    --     })
+    --   end,
+    -- })
 
     use({
       'andweeb/presence.nvim',
