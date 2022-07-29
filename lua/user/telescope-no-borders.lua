@@ -6,7 +6,7 @@ local function to_hex(color)
   return string.format("%x", color)
 end
 
-local bg = "FloatBorder"
+local bg = "NormalFloat"
 local bg_hl = get_hl(bg)
 local bg_hex = to_hex(bg_hl.background)
 
@@ -15,10 +15,18 @@ vim.cmd([[hi! TelescopeNormal guibg=#]] .. bg_hex)
 local border_hl = get_hl("TelescopeBorder")
 vim.cmd([[highlight! TelescopeBorder guifg=#]] ..
   bg_hex .. [[ guibg=#]] .. bg_hex)
+vim.cmd([[highlight! TelescopeResultsBorder guifg=#]] ..
+  bg_hex .. [[ guibg=#]] .. bg_hex)
+vim.cmd([[highlight! TelescopePreviewBorder guifg=#]] ..
+  bg_hex .. [[ guibg=#]] .. bg_hex)
 
 local title_hl = get_hl("Function")
 vim.cmd([[highlight! TelescopeTitle gui=bold guifg=#]] .. bg_hex ..
   [[ guibg=#]] .. to_hex(title_hl.foreground))
+
+local preview_hl = get_hl("String")
+vim.cmd([[highlight! TelescopePreviewTitle gui=bold guifg=#]] .. bg_hex ..
+  [[ guibg=#]] .. to_hex(preview_hl.foreground))
 
 local prompt = "ColorColumn"
 local prompt_hl = get_hl(prompt)

@@ -5,7 +5,7 @@ M.dropdown = function()
     -- theme = "dropdown",
 
     previewer = false,
-    results_title = "Results",
+    results_title = false,
 
     sorting_strategy = "ascending",
     prompt_cutoff = 1,

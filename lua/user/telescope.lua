@@ -13,6 +13,14 @@ telescope.setup({
     -- selection_caret = " ",
     selection_caret = "  ",
     path_display = { "smart" },
+    sorting_strategy = "ascending",
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+      }
+    },
+    borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+    results_title = false,
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
