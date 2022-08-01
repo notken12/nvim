@@ -188,7 +188,7 @@ return packer.startup({
       config = [[require("user.autopairs")]],
     }) -- Autopairs, integrates with both cmp and treesitter
     use({ "saadparwaiz1/cmp_luasnip", after = "LuaSnip" }) -- snippet completions
-    use({ "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" })
+    -- use({ "hrsh7th/cmp-nvim-lsp", after = "cmp_luasnip" })
     use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" }) -- buffer completions
     use({ "hrsh7th/cmp-path", after = "cmp-buffer" }) -- path completions
     use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- cmdline completions
@@ -202,23 +202,14 @@ return packer.startup({
     }) -- a bunch of snippets to use
     use({ "L3MON4D3/LuaSnip", after = "nvim-cmp" }) --snippet engine
 
-    -- LSP
-    use({
+    use {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
-      after = "nvim-lsp-installer",
-      -- module = "lspconfig",
-      config = [[require("user.lsp")]],
-      requires = { "nlsp-settings.nvim", "null-ls.nvim" },
-    }) -- enable LSP
+      "hrsh7th/cmp-nvim-lsp",
+      config=[[require("user.lsp")]]
+    }
 
-    use({
-      "williamboman/nvim-lsp-installer", -- simple to use language server installer
-      opt = true,
-      after = "nvim-web-devicons",
-      setup = function()
-        packer_lazy_load("nvim-lsp-installer")
-      end,
-    })
     use({ "tamago324/nlsp-settings.nvim", after = "nvim-lsp-installer" }) -- language server settings defined in json for
     use({ "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer" }) -- for formatters and linters
     use({ "kosayoda/nvim-lightbulb", after = "nvim-lspconfig", config = [[require("user.lightbulb")]] })

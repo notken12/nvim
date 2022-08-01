@@ -20,11 +20,11 @@ vim.cmd([[highlight! TelescopeResultsBorder guifg=#]] ..
 vim.cmd([[highlight! TelescopePreviewBorder guifg=#]] ..
   bg_hex .. [[ guibg=#]] .. bg_hex)
 
-local title_hl = get_hl("Constant")
+local title_hl = get_hl("Statement")
 vim.cmd([[highlight! TelescopeTitle gui=bold guifg=#]] .. bg_hex ..
   [[ guibg=#]] .. to_hex(title_hl.foreground))
 
-local preview_hl = get_hl("String")
+local preview_hl = get_hl("Function")
 vim.cmd([[highlight! TelescopePreviewTitle gui=bold guifg=#]] .. bg_hex ..
   [[ guibg=#]] .. to_hex(preview_hl.foreground))
 
