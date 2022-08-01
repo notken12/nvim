@@ -20,7 +20,7 @@ vim.cmd([[highlight! TelescopeResultsBorder guifg=#]] ..
 vim.cmd([[highlight! TelescopePreviewBorder guifg=#]] ..
   bg_hex .. [[ guibg=#]] .. bg_hex)
 
-local title_hl = get_hl("Function")
+local title_hl = get_hl("Constant")
 vim.cmd([[highlight! TelescopeTitle gui=bold guifg=#]] .. bg_hex ..
   [[ guibg=#]] .. to_hex(title_hl.foreground))
 

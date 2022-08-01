@@ -32,7 +32,7 @@ local options = {
   wrap = true, -- display lines as one long line
   scrolloff = 8, -- is one of my fav
   sidescrolloff = 8,
-  guifont = "SFMono Nerd Font:h11", -- the font used in graphical neovim applications
+  guifont = "SFMono Nerd Font,Apple Color Emoji:h11", -- the font used in graphical neovim applications
   incsearch = true,
   visualbell = true,
   whichwrap = "<,>,[,],h,l",
@@ -47,3 +47,11 @@ end
 -- vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
 -- vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+vim.g.neovide_refresh_rate = 144
+vim.g.neovide_input_use_logo = true
+-- vim.g.neovide_transparency = 0.6
+-- vim.g.neovide_cursor_animation_length = 0.03
+-- vim.g.neovide_cursor_vfx_mode = "torpedo"
+-- vim.g.neovide_cursor_vfx_particle_lifetime = 1.7
+-- vim.g.neovide_cursor_vfx_opacity = 300.0

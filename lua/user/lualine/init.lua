@@ -179,25 +179,17 @@ local function lsp_client_names()
   return with_click_event
 end
 
+local themes = { ["vscode"] = 1, ["mogo"] = 1, ["tokyonight"] = 1, ["nord"] = 1, ["kanagawa"] = 1 }
+
 local function should_use_vscode_theme()
-  return vim.g.colors_name == "vscode" or vim.g.colors_name == "mogo"
-end
-
-local function should_use_tokyonight_theme()
-  return vim.g.colors_name == "tokyonight"
-end
-
-local function should_use_nord_theme()
-  return vim.g.colors_name == "nord"
+  return vim.g.colors_name == 'vscode'
 end
 
 local function theme()
-  if should_use_vscode_theme() then
-    return vscode_theme
-  elseif should_use_tokyonight_theme() then
-    return "tokyonight"
-  elseif should_use_nord_theme() then
-    return "nord"
+  if should_use_vscode_theme() then return vscode_theme end
+  local colorscheme = vim.g.colors_name
+  if themes[colorscheme] then
+    return colorscheme
   end
   return "auto"
 end

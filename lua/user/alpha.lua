@@ -1,6 +1,6 @@
 local status_ok, alpha = pcall(require, "alpha")
 if not status_ok then
-	return
+  return
 end
 
 local utils = require("utils")
@@ -18,28 +18,40 @@ local dashboard = require("alpha.themes.dashboard")
 -- 	[[                 |___/                        ]],
 -- }
 dashboard.section.header.val = {
-	[[                                            __                ]],
-	[[  ___ ___     ___     ___     ___   __  __ /\_\    ___ ___    ]],
-	[[ / __` __`\  / __`\  / __`\  / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-	[[/\ \/\ \/\ \/\ \_\ \/\ \_\ \/\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-	[[\ \_\ \_\ \_\ \____/\ \____ \ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-	[[ \/_/\/_/\/_/\/___/  \/____\ \/___/  \/__/    \/_/\/_/\/_/\/_/]],
-	[[                       /\____/                                ]],
-	[[                       \/___/                                 ]],
+  [[                                            __                ]],
+  [[  ___ ___     ___     ___     ___   __  __ /\_\    ___ ___    ]],
+  [[ / __` __`\  / __`\  / __`\  / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+  [[/\ \/\ \/\ \/\ \_\ \/\ \_\ \/\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+  [[\ \_\ \_\ \_\ \____/\ \____ \ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+  [[ \/_/\/_/\/_/\/___/  \/____\ \/___/  \/__/    \/_/\/_/\/_/\/_/]],
+  [[                       /\____/                                ]],
+  [[                       \/___/                                 ]],
 }
+
+-- dashboard.section.header.val = {
+--   [[                                                      __                ]],
+--   [[       ❄️    ___ ___     ___     ___     ___   __  __ /\_\    ___ ___    ]],
+--   [[ _\/\/_    / __` __`\  / __`\  / __`\  / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+--   [[_\_\/_/_  /\ \/\ \/\ \/\ \_\ \/\ \_\ \/\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+--   [[ /_/\_\   \ \_\ \_\ \_\ \____/\ \____ \ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+--   [[  /\/\     \/_/\/_/\/_/\/___/  \/____\ \/___/  \/__/    \/_/\/_/\/_/\/_/]],
+--   [[                                 /\____/                                ]],
+--   [[                                 \/___/                                 ]],
+-- }
+
 dashboard.section.buttons.val = {
-	dashboard.button(
-		"f",
-		"  Find file",
-		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>"
-	),
-	dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-	dashboard.button("p", "  Find project", ":Telescope projects <CR>"),
-	dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
-	dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
-	-- dashboard.button("c", "  Configuration", ":exe 'edit '.stdpath('config').'/init.lua' <CR>"),
-	dashboard.button("h", "  Tips", ":exe 'edit '.stdpath('config').'/mogo.txt' <CR>"),
-	dashboard.button("q", "  Quit Mogovim", ":qa<CR>"),
+  dashboard.button(
+    "f",
+    "  Find file",
+    "<cmd>lua require('telescope.builtin').find_files(require('user.telescope-themes').dropdown())<cr>"
+  ),
+  dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+  dashboard.button("p", "  Find project", ":Telescope projects <CR>"),
+  dashboard.button("r", "  Recent files", ":Telescope oldfiles <CR>"),
+  dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
+  -- dashboard.button("c", "  Configuration", ":exe 'edit '.stdpath('config').'/init.lua' <CR>"),
+  dashboard.button("h", "  Tips", ":exe 'edit '.stdpath('config').'/mogo.txt' <CR>"),
+  dashboard.button("q", "  Quit Mogovim", ":qa<CR>"),
 }
 
 -- local function footer()
@@ -56,7 +68,7 @@ dashboard.section.buttons.val = {
 
 --   ﯦ ﯧ  
 local function footer()
-	return " " .. mogo.get_random_tip()
+  return " " .. mogo.get_random_tip()
 end
 
 dashboard.section.footer.val = footer()
@@ -96,10 +108,10 @@ local foot_butt_padding_ub = vim.o.lines - header_padding - occu_height - #dashb
 local foot_butt_padding = math.floor((vim.fn.winheight("$") - 2 * header_padding - occu_height))
 
 dashboard.config.layout = {
-	{ type = "padding", val = header_padding },
-	dashboard.section.header,
-	{ type = "padding", val = head_butt_padding },
-	dashboard.section.buttons,
-	{ type = "padding", val = foot_butt_padding },
-	dashboard.section.footer,
+  { type = "padding", val = header_padding },
+  dashboard.section.header,
+  { type = "padding", val = head_butt_padding },
+  dashboard.section.buttons,
+  { type = "padding", val = foot_butt_padding },
+  dashboard.section.footer,
 }

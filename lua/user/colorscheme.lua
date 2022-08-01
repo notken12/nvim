@@ -3,9 +3,9 @@ vim.wo.fillchars = "eob: "
 -- For dark theme
 vim.g.vscode_style = "dark"
 -- Enable transparent background
-vim.g.vscode_transparent = 1
+-- vim.g.vscode_transparent = 1
 -- Enable italic comment
-vim.g.vscode_italic_comment = 1
+-- vim.g.vscode_italic_comment = 1
 -- Disable nvim-tree background color
 vim.g.vscode_disable_nvimtree_bg = true
 vim.opt.background = "dark"
@@ -54,4 +54,4 @@ vim.cmd([[colorscheme kanagawa]])
 
 -- vim.cmd([[colorscheme mogo]])
 
-require('user.telescope-no-borders')
+-- require('user.telescope-no-borders')
