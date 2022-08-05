@@ -15,7 +15,9 @@ M.get = function()
 	if not file then
 		return nil
 	end
-	return file:read()
+	local name = file:read()
+	io.close(file)
+	return name
 end
 
 M.load = function()
@@ -28,7 +30,8 @@ end
 M.save = function()
 	local path = M.get_path()
 	local file = io.open(path, "w+")
-	return file:write(vim.g.colors_name)
+	file:write(vim.g.colors_name)
+	io.close(file)
 end
 
 return M
