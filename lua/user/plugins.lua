@@ -67,17 +67,16 @@ return packer.startup({
 
 		use({
 			"wbthomason/packer.nvim",
-			event = "VimEnter",
+			--event = "VimEnter",
 		}) -- Have packer manage itself
 
 		use({
 			"JoosepAlviste/nvim-ts-context-commentstring",
-			keys = { "gc", "gb" },
 		})
 
 		use({
 			"numToStr/Comment.nvim", -- Easily comment stuff
-			after = "nvim-ts-context-commentstring",
+			--keys = { "gc", "gb", "gcc" },
 			config = [[require("user.comment")]],
 		})
 		-- Colorschemes
@@ -101,6 +100,7 @@ return packer.startup({
 		use({
 			"shaunsingh/nord.nvim",
 		})
+		use("marko-cerovac/material.nvim")
 
 		use({
 			"rktjmp/lush.nvim",
@@ -210,8 +210,8 @@ return packer.startup({
 			config = [[require("user.lsp")]],
 		})
 
-		use({ "tamago324/nlsp-settings.nvim", after = "nvim-lsp-installer" }) -- language server settings defined in json for
-		use({ "jose-elias-alvarez/null-ls.nvim", after = "nvim-lsp-installer" }) -- for formatters and linters
+		use({ "tamago324/nlsp-settings.nvim", after = "mason.nvim" }) -- language server settings defined in json for
+		use({ "jose-elias-alvarez/null-ls.nvim", after = "mason.nvim" }) -- for formatters and linters
 		use({ "kosayoda/nvim-lightbulb", after = "nvim-lspconfig", config = [[require("user.lightbulb")]] })
 
 		-- Telescope
@@ -275,7 +275,7 @@ return packer.startup({
 		})
 
 		-- Rust tools
-		use({ "simrat39/rust-tools.nvim", after = "nvim-lsp-installer" })
+		use({ "simrat39/rust-tools.nvim" })
 
 		-- Debugging
 		use({

@@ -1,3 +1,5 @@
+vim.cmd([[silent !rm $VIMRUNTIME/colors/*.vim]])
+
 -- Disable squiggly things at end of file
 vim.wo.fillchars = "eob: "
 -- For dark theme
@@ -51,6 +53,8 @@ require("kanagawa").setup({
 })
 
 -- vim.cmd([[colorscheme kanagawa]])
+
+vim.g.material_style = "darker"
 
 require("user.colorscheme-loader").load()
 
