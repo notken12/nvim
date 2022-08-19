@@ -103,6 +103,7 @@ return packer.startup({
     })
     use("marko-cerovac/material.nvim")
     use 'navarasu/onedark.nvim'
+    use 'sainnhe/everforest'
 
     use({ "kyazdani42/nvim-web-devicons", after = "vscode.nvim" })
     use({

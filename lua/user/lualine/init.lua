@@ -19,15 +19,24 @@ local function should_use_vscode_theme()
   return vim.g.colors_name == "vscode"
 end
 
-local diagnostics = {
+local function b(comp)
+  --[[ comp.separator = { ]]
+  --[[   left = "", ]]
+  --[[   right = "" ]]
+  --[[ } ]]
+  return comp
+end
+
+local dont_color_diagnostics = { ["gruvbox-material"] = 1, ["everforest"] = 1, ["vscode"] = 1 }
+local diagnostics = b({
   "diagnostics",
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
   symbols = { error = " ", warn = " " },
-  colored = not should_use_vscode_theme(),
+  colored = not (should_use_vscode_theme() or dont_color_diagnostics[vim.g.colors_name]),
   update_in_insert = false,
   always_visible = true,
-}
+})
 
 vim.cmd([[
  function! Show_diff(a,b,c,d)
@@ -35,7 +44,7 @@ vim.cmd([[
  endfunction
 ]])
 
-local diff = {
+local diff = b({
   "diff",
   colored = not should_use_vscode_theme(),
   symbols = { added = "+ ", modified = " ", removed = "- " }, -- changes diff symbols
@@ -45,7 +54,7 @@ local diff = {
     end
     return "%@Show_diff@" .. str .. "%X"
   end,
-}
+})
 
 local mode_icons = {
   insert = "+",
@@ -57,28 +66,29 @@ local mode_icons = {
   ["v-line"] = "",
 }
 
-local mode = {
+local mode = b({
   "mode",
   fmt = function(str)
     local icon = mode_icons[str:lower()] or ""
     -- return icon .. " " .. str:sub(1, 1)
     -- return icon .. " " .. str
     return str
+    --[[ return "ﬦ" ]]
   end,
   --[[ padding = 0, ]]
   color = { gui = "bold" },
   --separator = { left = "", right = "" },
   --right_padding = 2,
-}
+})
 
-local filetype = {
+local filetype = b({
   "filetype",
   icons_enabled = true,
   icon = nil,
   colored = not should_use_vscode_theme(),
-}
+})
 
-local filename = {
+local filename = b({
   "filename",
   file_status = false,
   padding = { left = 1, right = 1 },
@@ -93,7 +103,7 @@ local filename = {
   symbols = {
     unnamed = "",
   },
-}
+})
 local function git_user_name()
   local handle = io.popen("git config -l | rg user.name")
   if handle == nil then
@@ -104,7 +114,7 @@ local function git_user_name()
   return "   " .. result:sub(11, #result - 1)
 end
 
-local branch = {
+local branch = b({
   "branch",
   icons_enabled = true,
   icon = "",
@@ -115,16 +125,16 @@ local branch = {
     -- end
     return result
   end,
-}
+})
 
-local location = {
+local location = b({
   "location",
   color = { gui = "bold" },
   --separator = { left = "", right = "" },
   --right_padding = 2,
-}
+})
 
-local lsp_progress = {
+local lsp_progress = b({
   "lsp_progress",
   -- With spinner
   -- display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
@@ -148,7 +158,7 @@ local lsp_progress = {
   display_components = { "lsp_client_name", "spinner", { "title", "percentage", "message" } },
   timer = { progress_enddelay = 500, spinner = 200, lsp_client_name_enddelay = 1000 },
   spinner_symbols = { "⠟ ", "⠯ ", "⠷ ", "⠾ ", "⠽ ", "⠻ " },
-}
+})
 
 -- cool function for progress
 local progress = function()
@@ -236,10 +246,10 @@ M.setup = function()
       theme = theme(),
       -- component_separators = component_separators(),
       -- section_separators = section_separators(),
-      component_separators = normal_component_separators,
-      section_separators = normal_section_separators,
-      -- component_separators = { left = "|", right = "|" },
-      -- section_separators = { left = "", right = "" },
+      --[[ component_separators = normal_component_separators, ]]
+      --[[ section_separators = normal_section_separators, ]]
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
       disabled_filetypes = {},
       always_divide_middle = true,
       globalstatus = true,
