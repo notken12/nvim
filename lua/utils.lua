@@ -48,4 +48,17 @@ end
 --   fh:write(contents)
 --   fh:close()
 
+
+M.get_hl = function(name)
+	local ok, hl = pcall(vim.api.nvim_get_hl_by_name, name, true)
+	if not ok then
+		return nil
+	end
+	return hl
+end
+
+M.to_hex = function (color)
+	return string.format("%x", color)
+end
+
 return M

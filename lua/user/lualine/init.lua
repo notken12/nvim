@@ -177,7 +177,7 @@ local function lsp_client_names()
 	end
 	local client_names = {}
 	for _, client in ipairs(clients) do
-		table.insert(client_names, " " .. client.name)
+		table.insert(client_names, " " .. client.name)
 	end
 	local formatted = table.concat(client_names, "  ")
 	local with_click_event = "%@Show_lsp_clients@" .. formatted .. "%X"

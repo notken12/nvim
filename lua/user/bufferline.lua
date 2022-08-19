@@ -9,6 +9,8 @@ vim.cmd([[
  endfunction
 ]])
 
+local utils = require('utils')
+
 bufferline.setup({
 	options = {
 		numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -61,7 +63,7 @@ bufferline.setup({
 		--     return true
 		--   end
 		-- end,
-		offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+		offsets = { { filetype = "NvimTree", text = "", padding = 0 } },
 		show_buffer_icons = true,
 		show_buffer_close_icons = true,
 		show_close_icon = false,
@@ -82,6 +84,7 @@ bufferline.setup({
 				return {
 					{
 						text = "%@Quit_vim@  %X",
+            bg = '#' .. utils.to_hex(utils.get_hl("Error").foreground)
 					},
 				}
 			end,
