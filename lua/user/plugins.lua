@@ -102,11 +102,7 @@ return packer.startup({
       "shaunsingh/nord.nvim",
     })
     use("marko-cerovac/material.nvim")
-
-    use({
-      "rktjmp/lush.nvim",
-      cmd = { "Lushify", "LushImport", "LushRunQuickstart", "LushRunTutorial" },
-    })
+    use 'navarasu/onedark.nvim'
 
     use({ "kyazdani42/nvim-web-devicons", after = "vscode.nvim" })
     use({
@@ -308,6 +304,15 @@ return packer.startup({
     use({
       "tweekmonster/startuptime.vim",
       cmd = "StartupTime",
+    })
+
+    use({
+      "ziontee113/icon-picker.nvim",
+      config = function()
+        require("icon-picker").setup({
+          disable_legacy_commands = true
+        })
+      end,
     })
 
     -- use({
