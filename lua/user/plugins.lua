@@ -128,7 +128,7 @@ return packer.startup({
     use({
       "nvim-lualine/lualine.nvim",
       -- after = "packer.nvim",
-      --after = "lualine-lsp-progress",
+      after = "lualine-lsp-progress",
       -- setup = function()
       -- 	packer_lazy_load("lualine.nvim")
       -- end,
@@ -273,6 +273,9 @@ return packer.startup({
 
     -- Rust tools
     use({ "simrat39/rust-tools.nvim" })
+    use({ "mfussenegger/nvim-jdtls",
+      --config=[[require("user.jdtls")]]
+    })
 
     -- Debugging
     use({

@@ -23,7 +23,7 @@ end
 M.load = function()
 	local name = M.get()
 	if name then
-		vim.cmd([[colorscheme ]] .. name)
+		pcall(vim.cmd,[[colorscheme ]] .. name)
 	end
 end
 
