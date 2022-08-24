@@ -3,6 +3,12 @@ if not status_ok then
   return
 end
 
+local ok, jdtls = pcall(require, 'jdtls')
+if ok then
+  jdtls.setup_dap()
+end
+
+
 dap.adapters.node2 = {
   type = "executable",
   command = "node",

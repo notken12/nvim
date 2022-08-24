@@ -132,7 +132,7 @@ return packer.startup({
       -- setup = function()
       -- 	packer_lazy_load("lualine.nvim")
       -- end,
-      config = [[require("user.lualine")]],
+      config = [[require("user.lualine").setup()]],
     })
     use({ "arkav/lualine-lsp-progress" })
 
