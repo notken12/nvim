@@ -102,8 +102,8 @@ return packer.startup({
       "shaunsingh/nord.nvim",
     })
     use("marko-cerovac/material.nvim")
-    use 'navarasu/onedark.nvim'
-    use 'sainnhe/everforest'
+    use("navarasu/onedark.nvim")
+    use("sainnhe/everforest")
 
     use({ "kyazdani42/nvim-web-devicons", after = "vscode.nvim" })
     use({
@@ -208,7 +208,7 @@ return packer.startup({
     })
 
     use({ "tamago324/nlsp-settings.nvim" }) -- language server settings defined in json for
-    use({ "jose-elias-alvarez/null-ls.nvim" })
+    use({ "jose-elias-alvarez/null-ls.nvim", config = [[require('user.lsp.null-ls')]] })
     use({ "kosayoda/nvim-lightbulb", after = "nvim-lspconfig", config = [[require("user.lightbulb")]] })
 
     -- Telescope
@@ -273,9 +273,7 @@ return packer.startup({
 
     -- Rust tools
     use({ "simrat39/rust-tools.nvim" })
-    use({ "mfussenegger/nvim-jdtls",
-      --config=[[require("user.jdtls")]]
-    })
+    use({ "mfussenegger/nvim-jdtls", config = [[require("user.jdtls")]] })
 
     -- Debugging
     use({
@@ -314,7 +312,7 @@ return packer.startup({
       "ziontee113/icon-picker.nvim",
       config = function()
         require("icon-picker").setup({
-          disable_legacy_commands = true
+          disable_legacy_commands = true,
         })
       end,
     })

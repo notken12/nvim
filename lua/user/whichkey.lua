@@ -204,6 +204,12 @@ local mappings = {
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
+
+  j = {
+    name = "Java",
+    c = { "<cmd>!javac %<cr>", "Compile" },
+    r = { "<cmd>!javac % && java %< <cr>", "Compile and Run" }
+  }
 }
 
 which_key.setup(setup)

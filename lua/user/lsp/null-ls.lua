@@ -43,7 +43,7 @@ null_ls.register(no_really)
 null_ls.setup({
   debug = false,
   sources = {
-    formatting.prettier,
+    formatting.prettierd,
     -- formatting.black.with({ extra_args = { "--fast" } }),
     formatting.stylua,
     diagnostics.flake8,
