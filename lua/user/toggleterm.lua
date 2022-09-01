@@ -71,4 +71,9 @@ M.python_toggle = function()
   python:toggle()
 end
 
+local java_run = Terminal:new({ cmd = "javac % && java %", hidden = true })
+M.java_run_toggle = function()
+  java_run:toggle()
+end
+
 return M

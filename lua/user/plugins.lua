@@ -136,11 +136,11 @@ return packer.startup({
     use({ "arkav/lualine-lsp-progress" })
 
     -- Show outline in winbar
-    use({
-      "SmiteshP/nvim-gps",
-      after = "nvim-treesitter",
-      config = [[require("user.nvim-gps")]],
-    })
+    -- use({
+    --   "SmiteshP/nvim-gps",
+    --   after = "nvim-treesitter",
+    --   config = [[require("user.nvim-gps")]],
+    -- })
 
     use({
       "akinsho/toggleterm.nvim",
@@ -256,6 +256,16 @@ return packer.startup({
     use({
       "David-Kunz/treesitter-unit",
       after = "nvim-treesitter",
+    })
+    use({
+      "nvim-treesitter/nvim-treesitter-context",
+      after = "nvim-treesitter",
+      setup = function()
+        require("treesitter-context").setup({})
+        vim.defer_fn(function()
+          vim.cmd([[hi! link TreesitterContext CursorLine]])
+        end, 0)
+      end,
     })
 
     -- Colorizer

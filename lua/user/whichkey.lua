@@ -80,7 +80,8 @@ local opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
-local mappings = {
+local mappings =
+{
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["b"] = {
     [[<cmd>lua require('telescope.builtin').buffers(require('user.telescope-themes').dropdown())<cr>]],
@@ -102,7 +103,7 @@ local mappings = {
   },
   ["i"] = {
     [[<cmd>IconPickerNormal alt_font symbols nerd_font emoji<cr>]],
-    "Insert emoji/icons"
+    "Insert emoji/icons",
   },
 
   d = {
@@ -200,6 +201,12 @@ local mappings = {
     u = { "<cmd>lua require('user.toggleterm').ncdu_toggle()<cr>", "NCDU" },
     t = { "<cmd>lua require('user.toggleterm').htop_toggle()<cr>", "Htop" },
     p = { "<cmd>lua require('user.toggleterm').python_toggle()<cr>", "Python" },
+    j = {
+      "<cmd>lua require('toggleterm').exec('javac " .. vim.fn.expand("%") .. " && java " .. vim.fn.expand(
+        "%<"
+      ) .. "')<CR>",
+      "Java compile and run",
+    },
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
@@ -208,8 +215,8 @@ local mappings = {
   j = {
     name = "Java",
     c = { "<cmd>!javac %<cr>", "Compile" },
-    r = { "<cmd>!javac % && java %< <cr>", "Compile and Run" }
-  }
+    r = { "<cmd>!javac % && java %< <cr>", "Compile and Run" },
+  },
 }
 
 which_key.setup(setup)
