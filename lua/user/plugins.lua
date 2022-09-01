@@ -273,7 +273,7 @@ return packer.startup({
 
     -- Rust tools
     use({ "simrat39/rust-tools.nvim" })
-    use({ "mfussenegger/nvim-jdtls", config = [[require("user.jdtls")]] })
+    use({ "mfussenegger/nvim-jdtls" })
 
     -- Debugging
     use({

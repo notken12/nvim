@@ -3,11 +3,10 @@ if not status_ok then
   return
 end
 
-local ok, jdtls = pcall(require, 'jdtls')
+local ok, jdtls = pcall(require, "jdtls")
 if ok then
   jdtls.setup_dap()
 end
-
 
 dap.adapters.node2 = {
   type = "executable",
@@ -80,9 +79,9 @@ dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 dap.adapters.coreclr = {
-  type = 'executable',
-  command = '/path/to/dotnet/netcoredbg/netcoredbg',
-  args = { '--interpreter=vscode' }
+  type = "executable",
+  command = "/path/to/dotnet/netcoredbg/netcoredbg",
+  args = { "--interpreter=vscode" },
 }
 
 dap.configurations.cs = {
@@ -91,10 +90,12 @@ dap.configurations.cs = {
     name = "launch - netcoredbg",
     request = "launch",
     program = function()
-      return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+      return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
     end,
   },
 }
 
-vim.fn.sign_define('DapBreakpoint', { text = '●', texthl = 'DiagnosticSignError', linehl = '',
-  numhl = 'DiagnosticSignError' })
+vim.fn.sign_define(
+  "DapBreakpoint",
+  { text = "●", texthl = "DiagnosticSignError", linehl = "", numhl = "DiagnosticSignError" }
+)

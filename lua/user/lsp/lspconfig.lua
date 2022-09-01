@@ -8,13 +8,6 @@ if not status_ok then
   return
 end
 
-local utils = require("utils")
-
-local jdtls_folder = utils.path_join(vim.fn.stdpath("data"), "mason", "packages", "jdtls")
-local jdtls_jar = utils.path_join(jdtls_folder, "plugins", "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar")
-local jdtls_bin_folder = utils.path_join(jdtls_folder, "bin")
-local jdtls_binary_path = utils.path_join(jdtls_bin_folder, "jdtls")
-
 local server_opts = {
   ["rust_analyzer"] = {
     checkOnSave = {
@@ -28,31 +21,6 @@ local server_opts = {
         "--all-features",
       },
     },
-  },
-  ["jdtls"] = {
-    root_dir = lspconfig.util.root_pattern(".git", "pom.xml"),
-    cmd = {
-      "java",
-      "-jar",
-      jdtls_jar,
-      "-configuration",
-      utils.path_join(jdtls_folder, "config_win"),
-      "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-      "-Dosgi.bundles.defaultStartLevel=4",
-      "-Declipse.product=org.eclipse.jdt.ls.core.product",
-      "-Dlog.level=ALL",
-      "-noverify",
-      "-Xmx1G",
-      "--add-modules=ALL-SYSTEM",
-      "--add-opens",
-      "java.base/java.util=ALL-UNNAMED",
-      "--add-opens",
-      "java.base/java.lang=ALL-UNNAMED",
-      "-data",
-      utils.path_join(".", ".jdtls_data"),
-    },
-    single_file_support = true,
-    -- autostart = false
   },
 }
 
