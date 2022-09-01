@@ -58,7 +58,6 @@ return packer.startup({
     -- My plugins here
     use({
       "lewis6991/impatient.nvim",
-      -- config = function() require('user.impatient') end
     })
 
     -- use("nathom/filetype.nvim")
@@ -191,7 +190,7 @@ return packer.startup({
     use({ "hrsh7th/cmp-path", after = "cmp-buffer" }) -- path completions
     use({ "hrsh7th/cmp-cmdline", after = "nvim-cmp" }) -- cmdline completions
     use({ "hrsh7th/cmp-calc", after = "nvim-cmp" }) -- math completions
-    -- use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }) -- display function signature
+    use({ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" }) -- display function signature
 
     -- snippets
     use({
@@ -205,6 +204,20 @@ return packer.startup({
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "hrsh7th/cmp-nvim-lsp",
+    })
+    use({
+      "RRethy/vim-illuminate",
+      config = function()
+        require("illuminate").configure({
+          delay = 100,
+          filetypes_denylist = {
+            "dirvish",
+            "fugitive",
+            "alpha",
+            "TelescopePrompt",
+          },
+        })
+      end,
     })
 
     use({ "tamago324/nlsp-settings.nvim" }) -- language server settings defined in json for
