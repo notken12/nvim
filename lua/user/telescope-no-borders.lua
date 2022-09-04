@@ -13,9 +13,9 @@ end
 local M = {}
 
 M.setup = function()
-  local bg = "NormalFloat"
+  local bg = "StatusLine"
   local bg_hl = get_hl(bg)
-  local bg_hex;
+  local bg_hex
   if bg_hl then
     bg_hex = to_hex(bg_hl.background)
 
@@ -33,11 +33,14 @@ M.setup = function()
   local preview_hl = get_hl("Function")
   if preview_hl then
     vim.cmd(
-      [[highlight! TelescopePreviewTitle gui=bold guifg=#]] .. bg_hex .. [[ guibg=#]] .. to_hex(preview_hl.foreground)
+      [[highlight! TelescopePreviewTitle gui=bold guifg=#]]
+      .. bg_hex
+      .. [[ guibg=#]]
+      .. to_hex(preview_hl.foreground)
     )
   end
 
-  local prompt = "ColorColumn"
+  local prompt = "NormalFloat"
   local prompt_hl = get_hl(prompt)
   if prompt_hl then
     local prompt_bg_hex = to_hex(prompt_hl.background)
