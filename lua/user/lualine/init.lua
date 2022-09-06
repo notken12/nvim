@@ -1,6 +1,7 @@
 local M = {}
 M.setup = function()
   local status_ok, lualine = pcall(require, "lualine")
+  local ok, auto_theme = pcall(require, "lualine.themes.auto")
   local utils = require("utils")
   if not status_ok then
     return
@@ -211,7 +212,19 @@ M.setup = function()
     if themes[colorscheme] then
       return colorscheme
     end
-    return "auto"
+    return auto_theme
+  end
+
+  local function theme_glassy()
+    local theme = theme()
+    theme.command.c.bg = "NONE"
+    theme.inactive.c.bg = "NONE"
+    theme.insert.c.bg = "NONE"
+    theme.normal.c.bg = "NONE"
+    theme.replace.c.bg = "NONE"
+    theme.terminal.c.bg = "NONE"
+    theme.visual.c.bg = "NONE"
+    return theme
   end
 
   local powerline_component_separators = { left = "", right = "" }
@@ -242,13 +255,16 @@ M.setup = function()
     options = {
       icons_enabled = true,
       -- theme = "auto",
-      theme = theme(),
+      --[[ theme = theme(), ]]
+      theme = theme_glassy(),
       -- component_separators = component_separators(),
       -- section_separators = section_separators(),
       --[[ component_separators = normal_component_separators, ]]
       --[[ section_separators = normal_section_separators, ]]
+      --[[ component_separators = { left = "", right = "" }, ]]
+      --[[ section_separators = { left = "", right = "" }, ]]
       component_separators = { left = "", right = "" },
-      section_separators = { left = "", right = "" },
+      section_separators = { left = " ", right = " " },
       disabled_filetypes = {},
       always_divide_middle = true,
       globalstatus = true,
