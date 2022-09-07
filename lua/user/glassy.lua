@@ -7,6 +7,7 @@ M.setup = function()
 
   local hl_groups = {
     "NormalFloat",
+    "FloatBorder",
     "Normal",
     "Folded",
     "NvimTreeNormal",

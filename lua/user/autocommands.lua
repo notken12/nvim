@@ -21,7 +21,21 @@ autocmd("ColorScheme", {
     require("user.telescope-no-borders").setup()
     require("user.colorscheme-loader").save()
     local ok, lualine = pcall(require, "user.lualine")
-    if ok then lualine.setup() end
+    if ok then
+      lualine.setup()
+    end
+  end,
+})
+
+autocmd("OptionSet", {
+  callback = function(v)
+    if v.option_type == "bg" or v.option_type == "background" then
+      require("user.colorscheme-loader").save()
+      local ok, lualine = pcall(require, "user.lualine")
+      if ok then
+        lualine.setup()
+      end
+    end
   end,
 })
 
