@@ -1,11 +1,12 @@
 local M = {}
 M.setup = function()
   local status_ok, lualine = pcall(require, "lualine")
-  local ok, auto_theme = pcall(require, "lualine.themes.auto")
-  local utils = require("utils")
-  if not status_ok then
-    return
-  end
+  --[[ local ok, auto_theme = pcall(require, "lualine.themes.auto") ]]
+  --[[ local utils = require("utils") ]]
+  --[[ if not status_ok then ]]
+  --[[   return ]]
+  --[[ end ]]
+  local auto_theme = "auto"
 
   local status_ok_icons, nvim_web_devicons = pcall(require, "nvim-web-devicons")
   if not status_ok_icons then
@@ -215,18 +216,6 @@ M.setup = function()
     return auto_theme
   end
 
-  local function theme_glassy()
-    local theme = theme()
-    theme.command.c.bg = "NONE"
-    theme.inactive.c.bg = "NONE"
-    theme.insert.c.bg = "NONE"
-    theme.normal.c.bg = "NONE"
-    theme.replace.c.bg = "NONE"
-    theme.terminal.c.bg = "NONE"
-    theme.visual.c.bg = "NONE"
-    return theme
-  end
-
   local powerline_component_separators = { left = "", right = "" }
   local powerline_section_separators = { left = "", right = "" }
   local normal_component_separators = { left = "|", right = "|" }
@@ -256,7 +245,6 @@ M.setup = function()
       icons_enabled = true,
       -- theme = "auto",
       theme = theme(),
-      --theme = theme_glassy(),
       -- component_separators = component_separators(),
       -- section_separators = section_separators(),
       --[[ component_separators = normal_component_separators, ]]
