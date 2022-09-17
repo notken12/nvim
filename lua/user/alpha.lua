@@ -39,6 +39,37 @@ dashboard.section.header.val = {
 --   [[                                 \/___/                                 ]],
 -- }
 
+--[[ dashboard.section.header.val = { ]]
+--[[   "▛▀▀▀▀▌", ]]
+--[[   "▌▄▙▄▖▌", ]]
+--[[   "▌▄▙▄▖▌", ]]
+--[[   "▌ ▌ ▖▌", ]]
+--[[   "▌ ▀▀▘▌", ]]
+--[[   "▌▀▀▌▘▌", ]]
+--[[   "▌ ▝▘▘▌", ]]
+--[[   "▌▛   ▌", ]]
+--[[   "▌▀▀▘ ▌", ]]
+--[[   "▀▀▀▀▀▘", ]]
+--[[ } ]]
+
+--[[ dashboard.section.header.val = { ]]
+--[[   "▛▀▀▀▀▀▀▀▀▜", ]]
+--[[   "▌▄▙▄▖▝▀▜▝▐", ]]
+--[[   "▌▄▙▄▖  ▀▝▐", ]]
+--[[   "▌ ▌ ▖▐▘  ▐", ]]
+--[[   "▌ ▀▀▘▝▀▀ ▐", ]]
+--[[   "▀▀▀▀▀▀▀▀▀▀", ]]
+--[[ } ]]
+
+dashboard.section.header.val = {
+  "█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█",
+  "█ ▄▄█▄▄▄▄ ▀▀▀▀█ ▀ █",
+  "█ ▄▄█▄▄▄▄    ▀▀ ▀ █",
+  "█   █   ▄ █▀      █",
+  "█   ▀▀▀▀▀ ▀▀▀▀▀   █",
+  "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀",
+}
+
 dashboard.section.buttons.val = {
   dashboard.button(
     "f",
@@ -74,11 +105,10 @@ end
 dashboard.section.footer.val = footer()
 
 dashboard.section.footer.opts.hl = "Type"
-dashboard.section.header.opts.hl = "Include"
+dashboard.section.header.opts.hl = "LineNr"
 dashboard.section.buttons.opts.hl = "Keyword"
 
 dashboard.opts.opts.noautocmd = true
-alpha.setup(dashboard.opts)
 
 -- ┌──────────────────────────────────────────────────────────┐
 -- │                  /                                       │
@@ -103,7 +133,7 @@ alpha.setup(dashboard.opts)
 
 local head_butt_padding = 4
 local occu_height = #dashboard.section.header.val + 2 * #dashboard.section.buttons.val + head_butt_padding
-local header_padding = math.max(0, math.ceil((vim.fn.winheight("$") - occu_height) * 0.25))
+local header_padding = math.max(0, math.ceil((vim.fn.winheight("$") - occu_height) * 0.4))
 local foot_butt_padding_ub = vim.o.lines - header_padding - occu_height - #dashboard.section.footer.val - 3
 local foot_butt_padding = math.floor((vim.fn.winheight("$") - 2 * header_padding - occu_height))
 
@@ -112,6 +142,8 @@ dashboard.config.layout = {
   dashboard.section.header,
   { type = "padding", val = head_butt_padding },
   dashboard.section.buttons,
-  { type = "padding", val = foot_butt_padding },
-  dashboard.section.footer,
+  --[[ { type = "padding", val = foot_butt_padding }, ]]
+  --[[ dashboard.section.footer, ]]
 }
+
+alpha.setup(dashboard.opts)

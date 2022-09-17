@@ -1,7 +1,5 @@
 vim.cmd([[silent !rm $VIMRUNTIME/colors/*.vim]])
 
--- Disable squiggly things at end of file
-vim.wo.fillchars = "eob: "
 -- For dark theme
 vim.g.vscode_style = "dark"
 -- Enable transparent background

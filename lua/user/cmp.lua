@@ -128,6 +128,9 @@ cmp.setup({
     select = false,
   },
   window = {
+    --[[ documentation = { ]]
+    --[[   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, ]]
+    --[[ }, ]]
     documentation = {
       border = { " ", " ", " ", " ", " ", " ", " ", " " },
     },

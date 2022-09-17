@@ -18,7 +18,7 @@ autocmd("BufUnload", {
 autocmd("ColorScheme", {
   callback = function()
     -- print(vim.g.colors_name)
-    require("user.telescope-no-borders").setup()
+    --[[ require("user.telescope-no-borders").setup() ]]
     require("user.colorscheme-loader").save()
     local ok, lualine = pcall(require, "user.lualine")
     if ok then

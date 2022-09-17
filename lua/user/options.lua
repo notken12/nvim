@@ -36,6 +36,7 @@ local options = {
   incsearch = true,
   visualbell = true,
   whichwrap = "<,>,[,],h,l",
+  fillchars = "eob: ",
 }
 
 vim.opt.shortmess:append("c")

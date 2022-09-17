@@ -19,34 +19,34 @@ M.setup = function()
   if bg_hl then
     bg_hex = to_hex(bg_hl.background)
 
-    vim.cmd([[hi! TelescopeNormal guibg=#]] .. bg_hex)
-    --vim.cmd([[hi! link TelescopeBorder TelescopeNormal]])
-    vim.cmd([[highlight! TelescopeBorder guifg=#]] .. bg_hex .. [[ guibg=#]] .. bg_hex)
-    vim.cmd([[highlight! TelescopeResultsBorder guifg=#]] .. bg_hex .. [[ guibg=#]] .. bg_hex)
-    vim.cmd([[highlight! TelescopePreviewBorder guifg=#]] .. bg_hex .. [[ guibg=#]] .. bg_hex)
+    vim.cmd([[hi TelescopeNormal guibg=#]] .. bg_hex)
+    --vim.cmd([[hi link TelescopeBorder TelescopeNormal]])
+    vim.cmd([[highlight TelescopeBorder guifg=#]] .. bg_hex .. [[ guibg=#]] .. bg_hex)
+    vim.cmd([[highlight TelescopeResultsBorder guifg=#]] .. bg_hex .. [[ guibg=#]] .. bg_hex)
+    vim.cmd([[highlight TelescopePreviewBorder guifg=#]] .. bg_hex .. [[ guibg=#]] .. bg_hex)
   end
   local title_hl = get_hl("Statement")
   if title_hl then
-    vim.cmd([[highlight! TelescopeTitle gui=bold guifg=#]] .. bg_hex .. [[ guibg=#]] .. to_hex(title_hl.foreground))
+    vim.cmd([[highlight TelescopeTitle gui=bold guifg=#]] .. bg_hex .. [[ guibg=#]] .. to_hex(title_hl.foreground))
   end
 
   local preview_hl = get_hl("Function")
   if preview_hl then
     vim.cmd(
-      [[highlight! TelescopePreviewTitle gui=bold guifg=#]]
+      [[highlight TelescopePreviewTitle gui=bold guifg=#]]
       .. bg_hex
       .. [[ guibg=#]]
       .. to_hex(preview_hl.foreground)
     )
   end
 
-  local prompt = "NormalFloat"
+  local prompt = "CursorLine"
   local prompt_hl = get_hl(prompt)
   if prompt_hl then
     local prompt_bg_hex = to_hex(prompt_hl.background)
 
-    vim.cmd([[hi! TelescopePromptNormal guibg=#]] .. prompt_bg_hex)
-    vim.cmd([[hi! TelescopePromptBorder guibg=#]] .. prompt_bg_hex .. [[ guifg=#]] .. prompt_bg_hex)
+    vim.cmd([[hi TelescopePromptNormal guibg=#]] .. prompt_bg_hex)
+    vim.cmd([[hi TelescopePromptBorder guibg=#]] .. prompt_bg_hex .. [[ guifg=#]] .. prompt_bg_hex)
   end
 
   vim.cmd([[nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
