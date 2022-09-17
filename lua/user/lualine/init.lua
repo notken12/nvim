@@ -245,14 +245,14 @@ M.setup = function()
       icons_enabled = true,
       -- theme = "auto",
       theme = theme(),
-      -- component_separators = component_separators(),
-      -- section_separators = section_separators(),
+      component_separators = component_separators(),
+      section_separators = section_separators(),
       --[[ component_separators = normal_component_separators, ]]
       --[[ section_separators = normal_section_separators, ]]
       --[[ component_separators = { left = "", right = "" }, ]]
       --[[ section_separators = { left = "", right = "" }, ]]
       component_separators = { left = "", right = "" },
-      section_separators = { left = " ", right = " " },
+      --[[ section_separators = { left = "", right = "" }, ]]
       disabled_filetypes = {},
       always_divide_middle = true,
       globalstatus = true,
