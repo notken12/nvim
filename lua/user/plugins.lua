@@ -80,29 +80,10 @@ return packer.startup({
       config = [[require("user.comment")]],
     })
     -- Colorschemes
-    use({
-      "sainnhe/gruvbox-material",
-    })
-    use({
-      "rebelot/kanagawa.nvim",
-      config = [[require("user.colorscheme")]],
-    })
+    use("notken12/base46-colors")
     use({
       "Mofiqul/vscode.nvim",
     })
-    use({
-      "folke/tokyonight.nvim",
-    })
-    use({
-      "EdenEast/nightfox.nvim",
-      tag = "v1.0.0",
-    })
-    use({
-      "shaunsingh/nord.nvim",
-    })
-    use("marko-cerovac/material.nvim")
-    use("navarasu/onedark.nvim")
-    use("sainnhe/everforest")
 
     use({ "kyazdani42/nvim-web-devicons", after = "vscode.nvim" })
     use({
