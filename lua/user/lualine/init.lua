@@ -203,7 +203,7 @@ M.setup = function()
     return with_click_event
   end
 
-  local themes = { ["vscode"] = 1, ["mogo"] = 1, ["tokyonight"] = 1, ["nord"] = 1, ["kanagawa"] = 1 }
+  local themes = { ["vscode"] = 1 }
 
   local function theme()
     if should_use_vscode_theme() then

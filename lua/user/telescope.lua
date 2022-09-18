@@ -19,7 +19,7 @@ telescope.setup({
         prompt_position = "top",
       }
     },
-    borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+    --[[ borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }, ]]
     results_title = false,
     mappings = {
       i = {
@@ -94,6 +94,11 @@ telescope.setup({
     -- }
     -- Now the picker_config_key will be applied every time you call this
     -- builtin picker
+    pickers = {
+      colorscheme = {
+        enable_preview = true
+      }
+    }
   },
   extensions = {
     -- Your extension configuration goes here:
