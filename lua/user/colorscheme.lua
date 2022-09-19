@@ -1,5 +1,3 @@
-vim.cmd([[silent !rm $VIMRUNTIME/colors/*.vim]])
-
 -- For dark theme
 vim.g.vscode_style = "dark"
 -- Enable transparent background
