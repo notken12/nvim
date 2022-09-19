@@ -1,3 +1,6 @@
+vim.bo.shiftwidth = 3
+vim.bo.tabstop = 3
+
 local ok, jdtls = pcall(require, "jdtls")
 if not ok then
 	return
