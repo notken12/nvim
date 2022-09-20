@@ -137,6 +137,9 @@ cmp.setup({
     -- completion = {
     -- 	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     -- },
+    -- completion = {
+    -- 	border = { " ", " ", " ", " ", " ", " ", " ", " " },
+    -- },
   },
   experimental = {
     ghost_text = true,
