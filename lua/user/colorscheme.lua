@@ -58,7 +58,7 @@ vim.g.material_style = "darker"
 
 vim.opt.background = "light"
 require("user.colorscheme-loader").load()
---[[ require("user.glassy").setup() ]]
+-- require("user.glassy").setup()
 
 -- vim.cmd([[colorscheme mogo]])
 

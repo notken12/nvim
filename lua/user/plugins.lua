@@ -188,17 +188,7 @@ return packer.startup({
     })
     use({
       "RRethy/vim-illuminate",
-      config = function()
-        require("illuminate").configure({
-          delay = 100,
-          filetypes_denylist = {
-            "dirvish",
-            "fugitive",
-            "alpha",
-            "TelescopePrompt",
-          },
-        })
-      end,
+      config = [[require("user.illuminate")]],
     })
 
     use({ "tamago324/nlsp-settings.nvim" }) -- language server settings defined in json for
