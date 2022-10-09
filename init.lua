@@ -8,5 +8,5 @@ require("user.plugins")
 -- Cache the humungous packer_compiled.lua file with impatient.nvim
 -- for a solid speedup
 pcall(require, "packer_compiled")
-require("user.lsp")
+-- require("user.lsp")
 require("user.colorscheme")

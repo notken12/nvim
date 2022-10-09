@@ -37,6 +37,7 @@ local options = {
   visualbell = true,
   whichwrap = "<,>,[,],h,l",
   fillchars = "eob: ",
+  -- winbar = "%=%#TelescopePreviewTitle# %t %#WinBar#%=",
 }
 
 vim.opt.shortmess:append("c")

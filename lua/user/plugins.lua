@@ -181,13 +181,23 @@ return packer.startup({
     use({ "L3MON4D3/LuaSnip", after = "nvim-cmp" }) --snippet engine
 
     use({
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
-      "hrsh7th/cmp-nvim-lsp",
+      requires = {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "hrsh7th/cmp-nvim-lsp",
+        "simrat39/rust-tools.nvim",
+      },
+      after = "packer.nvim",
+      config = [[require("user.lsp")]],
     })
+
+    -- Rust tools
+    use({ "mfussenegger/nvim-jdtls" })
     use({
       "RRethy/vim-illuminate",
+      -- after = "packer.nvim",
+      event = "BufEnter",
       config = [[require("user.illuminate")]],
     })
 
@@ -199,12 +209,12 @@ return packer.startup({
     use({
       "nvim-telescope/telescope.nvim",
       cmd = "Telescope",
-      module = "telescope",
+      module = { "telescope", "telescope.builtin" },
       config = [[require("user.telescope")]],
     })
     use({
       "nvim-telescope/telescope-dap.nvim",
-      after = { "nvim-dap" },
+      after = "telescope.nvim",
       config = [[require("user.telescope-dap")]],
     })
     use({
@@ -265,10 +275,6 @@ return packer.startup({
       config = [[require("user.git-conflict")]],
     })
 
-    -- Rust tools
-    use({ "simrat39/rust-tools.nvim" })
-    use({ "mfussenegger/nvim-jdtls" })
-
     -- Debugging
     use({
       "mfussenegger/nvim-dap",
@@ -286,7 +292,6 @@ return packer.startup({
     })
     use({
       "rcarriga/nvim-dap-ui",
-      requires = { "mfussenegger/nvim-dap" },
       module = "dapui",
       config = [[require("user.nvim-dap-ui")]],
     })
@@ -310,6 +315,18 @@ return packer.startup({
         })
       end,
     })
+
+    -- use({
+    --   "folke/noice.nvim",
+    --   event = "VimEnter",
+    --   config = [[require("user.noice")]],
+    --   requires = {
+    --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    --     "MunifTanjim/nui.nvim",
+    --     "rcarriga/nvim-notify",
+    --     "hrsh7th/nvim-cmp",
+    --   },
+    -- })
 
     -- use({
     -- 	"ghillb/cybu.nvim",

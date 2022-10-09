@@ -132,6 +132,25 @@ dap.configurations.python = {
   },
 }
 
+dap.adapters.java = {
+  type = "executable",
+  command = "java-debug-adapter", -- adjust as needed, must be absolute path
+  name = "Java Debug Adapter",
+}
+
+dap.configurations.java = {
+  {
+    name = "Launch",
+    type = "java",
+    request = "launch",
+    program = "${file}",
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = "inspector",
+    console = "integratedTerminal",
+  },
+}
+
 vim.fn.sign_define(
   "DapBreakpoint",
   { text = "●", texthl = "DiagnosticSignError", linehl = "", numhl = "DiagnosticSignError" }
