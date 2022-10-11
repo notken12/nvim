@@ -1,7 +1,5 @@
-print("setup telescope")
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
-	print("no telescope")
 	return
 end
 
@@ -132,4 +130,3 @@ telescope.setup({
 })
 
 telescope.load_extension("ui-select")
-print("telescope set up ")
