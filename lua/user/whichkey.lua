@@ -215,7 +215,7 @@ local mappings =
   j = {
     name = "Java",
     c = { "<cmd>!javac %<cr>", "Compile" },
-    r = { "<cmd>!javac % && java %< <cr>", "Compile and Run" },
+    r = { "<cmd>!javac % && java -ea %< <cr>", "Compile and Run" },
   },
 }
 
