@@ -55,3 +55,5 @@ for _i, server in ipairs(servers) do
 		lspconfig[server].setup(merged_opts)
 	end
 end
+
+-- print("lsp setup")
