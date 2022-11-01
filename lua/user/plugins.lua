@@ -241,7 +241,7 @@ return packer.startup({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       -- event = { "BufRead", "BufNewFile" },
-      event = "VimEnter",
+      -- event = "VimEnter",
       setup = function()
         packer_lazy_load("nvim-treesitter")
       end,
