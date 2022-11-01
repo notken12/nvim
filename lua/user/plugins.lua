@@ -206,15 +206,14 @@ return packer.startup({
     })
 
     -- Rust tools
-    use({ "mfussenegger/nvim-jdtls" })
+    use({ "mfussenegger/nvim-jdtls", filetype = "java" })
     use({
       "RRethy/vim-illuminate",
       -- after = "packer.nvim",
-      event = "BufEnter",
+      -- event = "VimEnter",
       config = [[require("user.illuminate")]],
     })
 
-    use({ "tamago324/nlsp-settings.nvim" }) -- language server settings defined in json for
     use({ "jose-elias-alvarez/null-ls.nvim", config = [[require('user.lsp.null-ls')]] })
     use({ "kosayoda/nvim-lightbulb", after = "nvim-lspconfig", config = [[require("user.lightbulb")]] })
 
@@ -242,7 +241,7 @@ return packer.startup({
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       -- event = { "BufRead", "BufNewFile" },
-      -- event = "VimEnter",
+      event = "VimEnter",
       setup = function()
         packer_lazy_load("nvim-treesitter")
       end,
