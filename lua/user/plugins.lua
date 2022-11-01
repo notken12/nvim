@@ -195,11 +195,13 @@ return packer.startup({
         { "saadparwaiz1/cmp_luasnip" },
         { "hrsh7th/cmp-nvim-lsp" },
         { "hrsh7th/cmp-nvim-lua" },
+        { "windwp/nvim-autopairs" },
 
         -- Snippets
         { "L3MON4D3/LuaSnip" },
         { "rafamadriz/friendly-snippets" },
       },
+      event = "VimEnter",
       config = [[require("user.lsp")]],
     })
 
@@ -290,6 +292,7 @@ return packer.startup({
     -- Debugging
     use({
       "mfussenegger/nvim-dap",
+      requires = { "jayp0521/mason-nvim-dap.nvim" },
       module = "dap",
       config = [[require("user.nvim-dap")]],
     })

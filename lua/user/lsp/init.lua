@@ -44,3 +44,12 @@ lsp.nvim_workspace()
 lsp.setup()
 
 require("user.cmp")
+require("user.autopairs")
+
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd("BufWritePre", {
+  callback = function()
+    vim.cmd("LspZeroFormat")
+  end,
+})
