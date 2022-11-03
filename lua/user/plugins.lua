@@ -295,10 +295,6 @@ return packer.startup({
 			config = [[require("user.nvim-dap")]],
 		})
 		use({
-			"Pocco81/dap-buddy.nvim",
-			-- after = "nvim-dap",
-		})
-		use({
 			"theHamsta/nvim-dap-virtual-text",
 			after = "nvim-dap",
 			config = [[require("user.nvim-dap-virtual-text")]],
