@@ -16,7 +16,10 @@ if not ok then
 end
 
 -- dap.setup()
-mason_dap.setup()
+mason_dap.setup({
+  automatic_setup = true,
+})
+mason_dap.setup_handlers()
 
 vim.fn.sign_define(
   "DapBreakpoint",
