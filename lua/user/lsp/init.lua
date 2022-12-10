@@ -21,24 +21,24 @@
 
 local present, lsp = pcall(require, "lsp-zero")
 if not present then
-	return
+  return
 end
 
 lsp.preset("recommended")
 lsp.set_preferences({
-	suggest_lsp_servers = true,
-	setup_servers_on_start = true,
-	set_lsp_keymaps = true,
-	configure_diagnostics = true,
-	cmp_capabilities = true,
-	manage_nvim_cmp = false,
-	call_servers = "local",
-	sign_icons = {
-		error = "✘",
-		warn = "▲",
-		hint = "⚑",
-		info = "",
-	},
+  suggest_lsp_servers = true,
+  setup_servers_on_start = true,
+  set_lsp_keymaps = true,
+  configure_diagnostics = true,
+  cmp_capabilities = true,
+  manage_nvim_cmp = false,
+  call_servers = "local",
+  sign_icons = {
+    error = "✘",
+    warn = "▲",
+    hint = "⚑",
+    info = "",
+  },
 })
 lsp.nvim_workspace()
 lsp.setup()
@@ -47,9 +47,9 @@ require("user.cmp")
 require("user.autopairs")
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = function()
-		if not vim.g.dont_format then
-			vim.cmd.LspZeroFormat()
-		end
-	end,
+  callback = function()
+    if not vim.g.dont_format then
+      pcall(vim.cmd.LspZeroFormat())
+    end
+  end,
 })
