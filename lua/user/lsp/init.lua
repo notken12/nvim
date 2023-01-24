@@ -49,7 +49,7 @@ require("user.autopairs")
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     if not vim.g.dont_format then
-      pcall(vim.cmd.LspZeroFormat())
+      pcall(vim.cmd([[silent LspZeroFormat]]))
     end
   end,
 })
